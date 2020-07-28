@@ -1,0 +1,2059 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+			ExtentReports Library 2.41.1 | http://relevantcodes.com/extentreports-for-selenium/ | https://github.com/anshooarora/
+			Copyright (c) 2015, Anshoo Arora (Relevant Codes) | Copyrights licensed under the New BSD License | http://opensource.org/licenses/BSD-3-Clause
+			Documentation: http://extentreports.relevantcodes.com 
+		-->
+
+		<meta charset='UTF-8' /> 
+		<meta name='description' content='ExtentReports (by Anshoo Arora) is a reporting library for automation testing for .NET and Java. It creates detailed and beautiful HTML reports for modern browsers. ExtentReports shows test and step summary along with dashboards, system and environment details for quick analysis of your tests.' />
+		<meta name='robots' content='noodp, noydir' />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<meta name='extentx' id='extentx' content='' />
+		
+		<title>
+				ExtentReports 2.0
+		</title>
+		
+		
+		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.css' type='text/css' rel='stylesheet' />
+		
+		<style>
+				
+            
+                
+            
+        
+		</style>
+	</head>
+	
+	
+	<body class='extent default standard hide-overflow'>
+		<!-- nav -->
+		<nav>
+			<div class='logo-container blue darken-2'>
+				<a class='logo-content' href='http://extentreports.relevantcodes.com'>
+					<span>ExtentReports</span>
+				</a>
+				<a href='#' data-activates='slide-out' class='button-collapse hide-on-large-only'><i class='mdi-navigation-apps'></i></a>
+			</div>
+			<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+				<li class='analysis waves-effect active'><a href='#!' class='test-view' onclick="_updateCurrentStage(0)"><i class='mdi-action-dashboard'></i>Test Details</a></li>
+				<li class='analysis waves-effect'>
+					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>Analysis</a>
+				</li>
+			</ul>
+			<span class='report-name'>Automation Report</span> <span class='report-headline'></span>
+			<ul class='right hide-on-med-and-down nav-right'>
+				<li class='theme-selector' alt='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");' title='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");'>
+					<i class='mdi-hardware-desktop-windows'></i>
+				</li>
+				<li>
+					<span class='suite-started-time'>2020-07-27 16:51:45</span>
+				</li>
+				<li>
+					<span>v2.41.1</span>
+				</li>
+			</ul>
+		</nav>
+		<!-- /nav -->
+		
+		<!-- container -->
+		<div class='container'>
+			
+			<!-- dashboard -->
+			<div id='dashboard-view' class='row'>
+				<div class='time-totals'>
+					<div class='col l2 m4 s6'>
+						<div class='card suite-total-tests'> 
+							<span class='panel-name'>Total Tests</span> 
+							<span class='total-tests'> <span class='panel-lead'></span> </span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6'>
+						<div class='card suite-total-steps'> 
+							<span class='panel-name'>Total Steps</span> 
+							<span class='total-steps'> <span class='panel-lead'></span> </span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s12'>
+						<div class='card suite-total-time-current'> 
+							<span class='panel-name'>Total Time Taken (Current Run)</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 0m 7s+61ms</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s12'>
+						<div class='card suite-total-time-overall'> 
+							<span class='panel-name'>Total Time Taken (Overall)</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 0m 7s+61ms</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6 suite-start-time'>
+						<div class='card accent green-accent'> 
+							<span class='panel-name'>Start</span> 
+							<span class='panel-lead suite-started-time'>2020-07-27 16:51:38</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6 suite-end-time'>
+						<div class='card accent pink-accent'> 
+							<span class='panel-name'>End</span> 
+							<span class='panel-lead suite-ended-time'>2020-07-27 16:51:45</span> 
+						</div> 
+					</div>
+				</div>
+				<div class='charts'>
+					<div class='col s12 m6 l4 fh'> 
+						<div class='card-panel'> 
+							<div>
+								<span class='panel-name'>Tests View</span>
+							</div> 
+							<div class='panel-setting modal-trigger test-count-setting right'>
+								<a href='#test-count-setting'><i class='mdi-navigation-more-vert text-md'></i></a>
+							</div> 
+							<div class='chart-box'>
+								<canvas class='text-centered' id='test-analysis'></canvas>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='t-pass-count weight-normal'></span> test(s) passed</span>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='t-fail-count weight-normal'></span> test(s) failed, <span class='t-others-count weight-normal'></span> others</span>
+							</div> 
+						</div> 
+					</div> 
+					<div class='col s12 m6 l4 fh'> 
+						<div class='card-panel'> 
+							<div>
+								<span class='panel-name'>Steps View</span>
+							</div> 
+							<div class='panel-setting modal-trigger step-status-filter right'>
+								<a href='#step-status-filter'><i class='mdi-navigation-more-vert text-md'></i></a>
+							</div> 
+							<div class='chart-box'>
+								<canvas class='text-centered' id='step-analysis'></canvas>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='s-pass-count weight-normal'></span> step(s) passed </span>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='s-fail-count weight-normal'></span> step(s) failed, <span class='s-others-count weight-normal'></span> others</span>
+							</div> 
+						</div> 
+					</div>
+					<div class='col s12 m12 l4 fh'> 
+						<div class='card-panel'> 
+							<span class='panel-name'>Pass Percentage</span> 
+							<span class='pass-percentage panel-lead'></span> 
+							<div class='progress light-blue lighten-3'> 
+								<div class='determinate light-blue'></div> 
+							</div> 
+						</div> 
+					</div>
+				</div>
+				<div class='system-view'>
+					<div class='col l4 m12 s12'>
+						<div class='card-panel'>
+							<span class='label info outline right'>Environment</span>
+							<table>
+								<thead>
+									<tr>
+										<th>Param</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td>User Name</td>
+											<td>satya.ranimekala</td>
+										</tr>
+										<tr>
+											<td>OS</td>
+											<td>Windows 10</td>
+										</tr>
+										<tr>
+											<td>Java Version</td>
+											<td>14.0.1</td>
+										</tr>
+										<tr>
+											<td>Host Name</td>
+											<td>Z5X-HYD-LT010</td>
+										</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /dashboard -->
+			
+			<!-- tests -->
+			<div id='test-view' class='row _addedTable'>
+				<div class='col _addedCell1'>
+					<div class='contents'>
+						<div class='card-panel heading'>
+							<h5>Tests</h5>
+						</div>
+						<div class='card-panel filters'>
+							<div>
+								<a class='dropdown-button btn-floating btn-small waves-effect waves-light grey tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+									<i class='mdi-action-reorder'></i>
+								</a>
+								<ul id='tests-toggle' class='dropdown-content'>
+									<li class='pass'><a href='#!'>Pass</a></li>
+									<li class='fail'><a href='#!'>Fail</a></li>
+									<li class='skip'><a href='#!'>Skip</a></li>
+									<li class='divider'></li>
+									<li class='clear'><a href='#!'>Clear Filters</a></li>
+								</ul>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light grey' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+									<i class='mdi-navigation-close'></i>
+								</a>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light grey' id='enableDashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+									<i class='mdi-action-track-changes'></i>
+								</a>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light blue enabled' id='refreshCharts' alt='Refresh Charts on Filters' title='Refresh Charts on Filters'>
+									<i class='mdi-navigation-refresh'></i>
+								</a>
+							</div>
+							<div class='search' alt='Search Tests' title='Search Tests'>
+								<div class='input-field left'>
+									<input id='searchTests' type='text' class='validate' placeholder='Search Tests...'>
+								</div>
+								<a href="#" class='btn-floating btn-small waves-effect waves-light grey'>
+									<i class='mdi-action-search'></i>
+								</a>
+							</div>
+						</div>
+						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
+							<div class='wrapper'>
+								<ul id='test-collection' class='test-collection'>
+										<li class='collection-item test displayed active pass ' extentid='5f7f72aa-af27-47df-9956-f736609095d5'>
+											<div class='test-head'>
+												<span class='test-name'>Verify FollowUser API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:44</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-07-27 16:51:45</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 0s+231ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Verify FollowUser API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:45</td>
+																	<td class='step-details'>Response body is {"status":200,"message":"success"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:45</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:45</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:45</td>
+																	<td class='step-details'>"message" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:45</td>
+																	<td class='step-details'>Time allocated 211ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:45</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='9a9f0a67-0d34-4579-af4b-dac7994d5af3'>
+											<div class='test-head'>
+												<span class='test-name'>Verify UnfollowUser API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:44</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Verify UnfollowUser API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Response body is {"status":200,"message":"success"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"message" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Time allocated 217ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='0905dafc-ed0e-4482-8ab1-a0e32261b940'>
+											<div class='test-head'>
+												<span class='test-name'>Verify DeleteUpiDetails API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:44</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Verify DeleteUpiDetails API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Response body is {"status":200,"user_id":3943,"username":"null","bank_details":null,"upi_details":{},"message":"UPI details deleted successfully"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"bank_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"upi_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"message" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Time allocated 216ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='ec81b560-4928-43b5-9855-658d5d928123'>
+											<div class='test-head'>
+												<span class='test-name'>Verify DeleteBankDetails API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:44</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Verify DeleteBankDetails API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Response body is {"status":200,"user_id":3943,"username":"null","bank_details":{},"upi_details":{"upi":{"@type":"d","upi":"automation@okhdfcbank"}},"message":"Bank details deleted successfully"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"@type" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"bank_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"upi_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"upi" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"@type" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Time allocated 213ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='e4a5bbf4-4142-4d33-b5a5-1abf82b6688a'>
+											<div class='test-head'>
+												<span class='test-name'>Verify GetBankDetails API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:43</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Verify GetBankDetails API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Response body is {"user_id":3943,"username":"null","bank_details":{"@type":"d","bank_account_full_name":"Automation","accountNumber":"237028302843","ifscCode":"SOI223","accountType":"savings"},"upi_details":{"@type":"d","upi":"automation@okhdfcbank"}}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"@type" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"bank_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"bank_account_full_name" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>"accountNumber" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>ifscCode node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>accountType node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>upi_details node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>upi node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Time allocated 222ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:44</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='2997b149-9445-4ee9-8b61-0c6a6e12252d'>
+											<div class='test-head'>
+												<span class='test-name'>Verify UpdateUpiDetails API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:43</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Verify UpdateUpiDetails API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Response body is {"status":200,"user_id":3943,"username":"null","upi_details":{"upi":"automation@okhdfcbank"},"message":"UPI details saved"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"upi_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"upi" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"message" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Time allocated 242ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='c8c62418-81af-436b-ae51-f9ab40636538'>
+											<div class='test-head'>
+												<span class='test-name'>Verify updateProfileImage API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:43</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Verify updateProfileImage API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Response body is {"profile_picture":"https://talkiezuserdata.blob.core.windows.net/3943/profile/Zeel-cover-02.jpg"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"profile_picture" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Time allocated 353ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='64148c82-2594-4e75-9718-85b786546bc9'>
+											<div class='test-head'>
+												<span class='test-name'>Verify updateProfile API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:42</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Verify updateProfile API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Response body is {"status":200,"error_code":1003,"message":"No Data Found"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'><pre>java.lang.AssertionError: "profile_picture" node is not present in the response body expected [true] but found [false]
+	at com.User.UserApiTests.PUT_UpdateProfile(UserApiTests.java:241)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:134)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:597)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:816)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.testng.TestRunner.privateRun(TestRunner.java:766)
+	at org.testng.TestRunner.run(TestRunner.java:587)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1109)
+	at org.testng.TestNG.runSuites(TestNG.java:1039)
+	at org.testng.TestNG.run(TestNG.java:1007)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>"profile_picture" node is not present in the response body expected [true] but found [false]</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>16:51:43</td>
+																	<td class='step-details'>Test Failed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='c9652c47-3315-4531-8f20-2bdf3f90552b'>
+											<div class='test-head'>
+												<span class='test-name'>Verify updatePreference API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:42</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Verify updatePreference API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Response body is {"display_language":"TL","content_languages":[],"interests":[]}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"display_language" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"content_languages" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"interests" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Time allocated 219ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='757d8a82-4824-4399-9c72-20ee576e541c'>
+											<div class='test-head'>
+												<span class='test-name'>Verify UpdateBankDetails API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:42</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Verify UpdateBankDetails API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Response body is {"status":200,"user_id":3943,"username":"null","bank_details":{"bank_account_full_name":"Automation","accountNumber":"237028302843","ifscCode":"SOI223","accountType":"savings"},"message":"Bank details saved"}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"bank_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"bank_account_full_name" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"accountNumber" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>ifscCode node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>accountType node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>message node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Time allocated 211ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='f4db9cd9-d921-443f-9ca0-c48d54629c81'>
+											<div class='test-head'>
+												<span class='test-name'>Verify getProfile API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:42</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Verify getProfile API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Response body is {"user_data":{"user_id":3943,"mobile":"9966166066","is_guest":false,"created_at":"2020-07-01T11:09:38.096Z","username":"null","profile_picture":"https://talkiezuserdata.blob.core.windows.net/3943/profile/Zeel-cover-02.jpg","is_followed":false},"videos":[]}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"user_data" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"mobile" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"is_guest" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"created_at" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"profile_picture" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"is_followed" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>"videos" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Time allocated 279ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='900cf21a-3967-489c-8f8c-73e41e654ef3'>
+											<div class='test-head'>
+												<span class='test-name'>Verify response body nodes of getOtherUserProfile API </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:41</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Verify response body nodes of getOtherUserProfile API</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Response body is {"user_data":{"user_id":4192,"mobile":"9999036030","is_guest":false,"created_at":"2020-07-03T20:03:18.968Z","username":"poojak","profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","is_followed":true},"videos":[{"content_name":"1DB56A43-5E86-4949-AF7F-41CE630E9557.mp4","need_moderation":false,"dislike_data":[],"content_id":6325,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"..","created_at":"2020-07-22 17:02:20","like_data":[{"@type":"d","@version":0,"liked_user_id":149048}],"parent_content_id":6303,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/thumbs/1.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/1DB56A43-5E86-4949-AF7F-41CE630E9557.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/1DB56A43-5E86-4949-AF7F-41CE630E9557.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#153:1137"],"status":true,"@fieldTypes":"in_likesContent=z,user_details=z,created_at=t,like_data=z,reactedParentData=z,in_userView=z,in_reactContent=z,in_userContent=z","total_like":1,"total_views":1,"total_share":0,"total_dislike":0,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{"content_id":6303,"first_image_url":"https://talkizcontentcdn.azureedge.net/143748/videos/q480p_merged_video_1595423024991/thumbs/1.jpg","cdn_url":"https://talkizcontentcdn.azureedge.net/143748/videos/q480p_merged_video_1595423024991/q480p_merged_video_1595423024991.m3u8"},"deeplink_url":"Checkout this video https://www.talkiz.app/6325 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/6325"},{"content_name":"178B8AE2-9235-4C3A-AB44-221660D46145.mp4","need_moderation":false,"dislike_data":[{"@type":"d","@version":0,"liked_user_id":138767}],"content_id":4221,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"My soldier","created_at":"2020-07-17 14:57:13","like_data":[{"@type":"d","@version":0,"liked_user_id":36713},{"@type":"d","@version":0,"liked_user_id":138723},{"@type":"d","@version":0,"liked_user_id":3938},{"@type":"d","@version":0,"liked_user_id":35117},{"@type":"d","@version":0,"liked_user_id":6832},{"@type":"d","@version":0,"liked_user_id":37482},{"@type":"d","@version":0,"liked_user_id":7574},{"@type":"d","@version":0,"liked_user_id":7289},{"@type":"d","@version":0,"liked_user_id":36760},{"@type":"d","@version":0,"liked_user_id":8389},{"@type":"d","@version":0,"liked_user_id":8971},{"@type":"d","@version":0,"liked_user_id":7587},{"@type":"d","@version":0,"liked_user_id":7577},{"@type":"d","@version":0,"liked_user_id":7415},{"@type":"d","@version":0,"liked_user_id":125674}],"parent_content_id":0,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/1.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/10.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/2.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/3.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/4.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/5.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/6.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/7.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/8.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/9.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/178B8AE2-9235-4C3A-AB44-221660D46145.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/178B8AE2-9235-4C3A-AB44-221660D46145.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#27:711"],"status":true,"@fieldTypes":"dislike_data=z,in_likesContent=z,user_details=z,created_at=t,like_data=z,in_dislikesContent=z,in_userView=z,in_userContent=z","total_like":15,"total_views":50,"total_share":0,"total_dislike":1,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/4221 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/4221"},{"content_name":"D789113A-BF7E-46A8-BD8B-28E5CB23764A.mp4","need_moderation":false,"dislike_data":[],"content_id":6326,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"..","created_at":"2020-07-22 17:04:42","like_data":[{"@type":"d","@version":0,"liked_user_id":149048}],"parent_content_id":0,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/thumbs/1.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/D789113A-BF7E-46A8-BD8B-28E5CB23764A.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/D789113A-BF7E-46A8-BD8B-28E5CB23764A.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#154:1174"],"status":true,"@fieldTypes":"in_likesContent=z,user_details=z,created_at=t,like_data=z,in_userView=z,in_userContent=z","total_like":1,"total_views":8,"total_share":0,"total_dislike":0,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/6326 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/6326"},{"content_name":"7996B9FE-81C4-48E8-BA08-F728AB610F0B.mp4","need_moderation":false,"dislike_data":[{"@type":"d","@version":0,"liked_user_id":4389}],"content_id":2789,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"Nice","created_at":"2020-07-06 12:27:14","like_data":[{"@type":"d","@version":0,"liked_user_id":4305},{"@type":"d","@version":0,"liked_user_id":2121},{"@type":"d","@version":0,"liked_user_id":4248},{"@type":"d","@version":0,"liked_user_id":2129},{"@type":"d","@version":0,"liked_user_id":4813},{"@type":"d","@version":0,"liked_user_id":3028},{"@type":"d","@version":0,"liked_user_id":2907},{"@type":"d","@version":0,"liked_user_id":7710},{"@type":"d","@version":0,"liked_user_id":7425},{"@type":"d","@version":0,"liked_user_id":7614}],"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/1.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/10.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/2.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/3.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/4.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/5.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/6.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/7.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/8.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/9.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/7996B9FE-81C4-48E8-BA08-F728AB610F0B.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/7996B9FE-81C4-48E8-BA08-F728AB610F0B.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#27:292"],"status":true,"@fieldTypes":"dislike_data=z,in_likesContent=z,user_details=z,in_sharesContent=z,created_at=t,like_data=z,in_dislikesContent=z,in_userView=z,in_userContent=z","total_like":10,"total_views":39,"total_share":1,"total_dislike":1,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/2789 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/2789"},{"content_name":"74107CE2-5733-4443-9634-EDD4924C8F50.mp4","need_moderation":false,"dislike_data":[],"content_id":4436,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"Preview ","created_at":"2020-07-19 16:13:14","like_data":[],"parent_content_id":0,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":false,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/74107CE2-5733-4443-9634-EDD4924C8F50.mp4"}]},"in_userContent":["#28:445"],"status":true,"@fieldTypes":"user_details=z,created_at=t,in_userView=z,in_userContent=z","total_like":0,"total_views":1,"total_share":0,"total_dislike":0,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/4436 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/4436"}]}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:42</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='5a115a54-ecdb-481e-96db-0c36ff44a04a'>
+											<div class='test-head'>
+												<span class='test-name'>Verify UsersFollowingMe API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:41</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Verify UsersFollowingMe API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Response body is [{"under18":false,"is_guest":false,"mobile":"8008164838","created_at":"2020-07-03T18:11:17.000Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/4181/profile/filename_1594705629418.jpeg","user_id":4181,"status":true,"username":"pvjpkumar1","is_followed":true},{"under18":true,"user_id":4396,"is_guest":false,"mobile":"9967235568","created_at":"2020-07-07T12:48:32.794Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/4396/profile/filename_1594206742666.jpeg","status":true,"username":"Sata","is_followed":true},{"under18":true,"is_guest":false,"bank_details":null,"mobile":"8143480171","created_at":"2020-07-01T05:08:39.838Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/3893/profile/filename_1594275762484.jpeg","upi_details":null,"user_id":3893,"status":true,"username":"g3","is_followed":true},{"under18":true,"is_guest":false,"mobile":"8513927450","created_at":"2020-07-13T18:10:49.626Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/9671/profile/filename_1594704640061.jpeg","user_id":9671,"status":true,"username":"ashis","is_followed":true},{"under18":true,"user_id":8392,"is_guest":false,"mobile":"8918799256","created_at":"2020-07-13T18:10:37.186Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/8392/profile/filename_1594689695697.jpeg","status":true,"username":"PRAKASH","is_followed":true},{"under18":true,"is_guest":false,"mobile":"9911091755","created_at":"2020-07-13T18:11:00.096Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/10603/profile/filename_1594706586441.jpeg","user_id":10603,"status":true,"username":"shahidKhan","is_followed":true},{"under18":true,"is_guest":false,"mobile":"9871355232","created_at":"2020-07-17T12:29:55.074Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/138739/profile/filename_1595231805024.jpeg","user_id":138739,"status":true,"username":"Shashisingh","is_followed":true},{"under18":true,"user_id":36477,"is_guest":false,"mobile":"9594163447","created_at":"2020-07-14T08:57:40.310Z","status":true,"username":"siddhi","is_followed":true},{"under18":true,"is_guest":false,"mobile":"8955671126","created_at":"2020-07-14T08:56:44.418Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/34706/profile/filename_1594800361975.jpeg","user_id":34706,"status":true,"username":"tannu","is_followed":true}]</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"under18" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_guest" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"mobile" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"created_at" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"profile_picture" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_followed" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Time allocated 209ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='c26b0c30-55c8-4e84-b38a-029fdcb8a549'>
+											<div class='test-head'>
+												<span class='test-name'>Verify getOtherUserProfile API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:41</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Verify getOtherUserProfile API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Response body is {"user_data":{"user_id":4192,"mobile":"9999036030","is_guest":false,"created_at":"2020-07-03T20:03:18.968Z","username":"poojak","profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","is_followed":true},"videos":[{"content_name":"1DB56A43-5E86-4949-AF7F-41CE630E9557.mp4","need_moderation":false,"dislike_data":[],"content_id":6325,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"..","created_at":"2020-07-22 17:02:20","like_data":[{"@type":"d","@version":0,"liked_user_id":149048}],"parent_content_id":6303,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/thumbs/1.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/1DB56A43-5E86-4949-AF7F-41CE630E9557.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/1DB56A43-5E86-4949-AF7F-41CE630E9557/1DB56A43-5E86-4949-AF7F-41CE630E9557.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#153:1137"],"status":true,"@fieldTypes":"in_likesContent=z,user_details=z,created_at=t,like_data=z,reactedParentData=z,in_userView=z,in_reactContent=z,in_userContent=z","total_like":1,"total_views":1,"total_share":0,"total_dislike":0,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{"content_id":6303,"first_image_url":"https://talkizcontentcdn.azureedge.net/143748/videos/q480p_merged_video_1595423024991/thumbs/1.jpg","cdn_url":"https://talkizcontentcdn.azureedge.net/143748/videos/q480p_merged_video_1595423024991/q480p_merged_video_1595423024991.m3u8"},"deeplink_url":"Checkout this video https://www.talkiz.app/6325 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/6325"},{"content_name":"178B8AE2-9235-4C3A-AB44-221660D46145.mp4","need_moderation":false,"dislike_data":[{"@type":"d","@version":0,"liked_user_id":138767}],"content_id":4221,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"My soldier","created_at":"2020-07-17 14:57:13","like_data":[{"@type":"d","@version":0,"liked_user_id":36713},{"@type":"d","@version":0,"liked_user_id":138723},{"@type":"d","@version":0,"liked_user_id":3938},{"@type":"d","@version":0,"liked_user_id":35117},{"@type":"d","@version":0,"liked_user_id":6832},{"@type":"d","@version":0,"liked_user_id":37482},{"@type":"d","@version":0,"liked_user_id":7574},{"@type":"d","@version":0,"liked_user_id":7289},{"@type":"d","@version":0,"liked_user_id":36760},{"@type":"d","@version":0,"liked_user_id":8389},{"@type":"d","@version":0,"liked_user_id":8971},{"@type":"d","@version":0,"liked_user_id":7587},{"@type":"d","@version":0,"liked_user_id":7577},{"@type":"d","@version":0,"liked_user_id":7415},{"@type":"d","@version":0,"liked_user_id":125674}],"parent_content_id":0,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/1.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/10.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/2.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/3.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/4.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/5.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/6.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/7.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/8.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/thumbs/9.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/178B8AE2-9235-4C3A-AB44-221660D46145.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/178B8AE2-9235-4C3A-AB44-221660D46145/178B8AE2-9235-4C3A-AB44-221660D46145.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#27:711"],"status":true,"@fieldTypes":"dislike_data=z,in_likesContent=z,user_details=z,created_at=t,like_data=z,in_dislikesContent=z,in_userView=z,in_userContent=z","total_like":15,"total_views":50,"total_share":0,"total_dislike":1,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/4221 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/4221"},{"content_name":"D789113A-BF7E-46A8-BD8B-28E5CB23764A.mp4","need_moderation":false,"dislike_data":[],"content_id":6326,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"..","created_at":"2020-07-22 17:04:42","like_data":[{"@type":"d","@version":0,"liked_user_id":149048}],"parent_content_id":0,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/thumbs/1.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/D789113A-BF7E-46A8-BD8B-28E5CB23764A.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/D789113A-BF7E-46A8-BD8B-28E5CB23764A/D789113A-BF7E-46A8-BD8B-28E5CB23764A.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#154:1174"],"status":true,"@fieldTypes":"in_likesContent=z,user_details=z,created_at=t,like_data=z,in_userView=z,in_userContent=z","total_like":1,"total_views":8,"total_share":0,"total_dislike":0,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/6326 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/6326"},{"content_name":"7996B9FE-81C4-48E8-BA08-F728AB610F0B.mp4","need_moderation":false,"dislike_data":[{"@type":"d","@version":0,"liked_user_id":4389}],"content_id":2789,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"Nice","created_at":"2020-07-06 12:27:14","like_data":[{"@type":"d","@version":0,"liked_user_id":4305},{"@type":"d","@version":0,"liked_user_id":2121},{"@type":"d","@version":0,"liked_user_id":4248},{"@type":"d","@version":0,"liked_user_id":2129},{"@type":"d","@version":0,"liked_user_id":4813},{"@type":"d","@version":0,"liked_user_id":3028},{"@type":"d","@version":0,"liked_user_id":2907},{"@type":"d","@version":0,"liked_user_id":7710},{"@type":"d","@version":0,"liked_user_id":7425},{"@type":"d","@version":0,"liked_user_id":7614}],"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":true,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"first_image_url":"https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/1.jpg","content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B.mp4","thumbnails":["https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/1.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/10.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/2.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/3.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/4.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/5.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/6.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/7.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/8.jpg","https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/thumbs/9.jpg"],"cdn_url":"https://talkizcontentcdn.azureedge.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/7996B9FE-81C4-48E8-BA08-F728AB610F0B.m3u8","hls_file_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/7996B9FE-81C4-48E8-BA08-F728AB610F0B/7996B9FE-81C4-48E8-BA08-F728AB610F0B.m3u8","gif_url":"","resolution":""}]},"in_userContent":["#27:292"],"status":true,"@fieldTypes":"dislike_data=z,in_likesContent=z,user_details=z,in_sharesContent=z,created_at=t,like_data=z,in_dislikesContent=z,in_userView=z,in_userContent=z","total_like":10,"total_views":39,"total_share":1,"total_dislike":1,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/2789 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/2789"},{"content_name":"74107CE2-5733-4443-9634-EDD4924C8F50.mp4","need_moderation":false,"dislike_data":[],"content_id":4436,"user_details":[{"@type":"d","@version":0,"full_name":null,"user_id":4192,"profile_picture":"https://talkiezuserdata.blob.core.windows.net/4192/profile/9A24A9A6-7A0B-4253-A8DA-D560B2235BAE.png","username":"poojak","is_official_verified":null,"@fieldTypes":"user_id=l,userFollowDetails=z","is_followed":true}],"description":"Preview ","created_at":"2020-07-19 16:13:14","like_data":[],"parent_content_id":0,"content_interest":"","content_language":"","user_tags":[],"song_id":"0","processed":false,"user_id":"4192","content_data":{"@type":"d","@version":0,"videos":[{"content_url":"https://talkiezuserdata.blob.core.windows.net/4192/videos/74107CE2-5733-4443-9634-EDD4924C8F50.mp4"}]},"in_userContent":["#28:445"],"status":true,"@fieldTypes":"user_details=z,created_at=t,in_userView=z,in_userContent=z","total_like":0,"total_views":1,"total_share":0,"total_dislike":0,"generated_tags":[],"is_liked":false,"is_disliked":false,"is_reacted":false,"parent_content_data":{},"deeplink_url":"Checkout this video https://www.talkiz.app/4436 on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_message":"Checkout this video %s on Talkiz App. Download the Talkiz App at https://www.talkiz.app","deeplink_share_url":"https://www.talkiz.app/4436"}]}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_data" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"mobile" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_guest" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"created_at" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"profile_picture" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_followed" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"videos" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_name" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"need_moderation" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"dislike_data" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"@type" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"@version" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"liked_user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_details" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"full_name" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_official_verified" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"@fieldTypes" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"deeplink_message" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"description" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"created_at" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"like_data" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"deeplink_share_url" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"liked_user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_interest" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_language" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_tags" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"song_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"processed" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_data" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"first_image_url" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_url" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"thumbnails" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"cdn_url" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"hls_file_url" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"gif_url": node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"resolution" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"in_userContent" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"@fieldTypes" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"total_like" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"total_views" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"total_share" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"total_dislike" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"generated_tags" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_liked" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Time allocated 318ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='a033dae3-7804-4add-b11a-4fa5fc9c3ba5'>
+											<div class='test-head'>
+												<span class='test-name'>Verify getPreference API StatusCode, Response Time and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:41</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Verify getPreference API StatusCode, Response Time and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Response body is {"display_language":"TL","content_languages":[],"interests":[]}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"display_language" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"content_languages" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"interests" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Time allocated 203ms is less than expected time 500ms</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='d35b819a-69de-452e-ad80-87a6a75631b1'>
+											<div class='test-head'>
+												<span class='test-name'>Verify userName&OTP API Response Code, ResponseTime and Nodes </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:40</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>Verify userName&OTP API Response Code, ResponseTime and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Response body is {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3REYXRhIjp7InVzZXJfaWQiOjM5NDMsIm1vYmlsZSI6Ijk5NjYxNjYwNjYifSwiaWF0IjoxNTk1ODQ4OTAxfQ.Gd2iIuVk6AG4K27y9HbnZrVl8UPGHWvk3_uNSxfRzbA","userDetails":{"under18":false,"is_guest":false,"mobile":"9966166066","created_at":"2020-07-01T11:09:38.096Z","profile_picture":"https://talkiezuserdata.blob.core.windows.net/3943/profile/Zeel-cover-02.jpg","user_id":3943,"status":true,"username":null,"display_language":"TL"}}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"token" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"userDetails" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"created_at" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"is_guest" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"status" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"mobile" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"username" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"under18" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>"profile_picture" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:41</td>
+																	<td class='step-details'>Test Passed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='3fb98553-5683-4df7-802d-d1d766c916a0'>
+											<div class='test-head'>
+												<span class='test-name'>Verify createUser API StatusCode, ResponseTime and Nodes </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-07-27 16:51:38</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:38</td>
+																	<td class='step-details'>Verify createUser API StatusCode, ResponseTime and Nodes</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:38</td>
+																	<td class='step-details'>API test has been started...</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>Response body is {"user_id":3943,"newUser":false}</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>Status code 200 validated successfully</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>"user_id" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>"newUser" node present in the response body</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>Time allocated 1412ms is greater than expected time 500ms expected [true] but found [false]</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>16:51:40</td>
+																	<td class='step-details'>Test Failed</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='test-details-wrapper' class='col _addedCell2'>
+					<div class='contents'>
+						<div class='card-panel details-view'>
+							<h5 class='details-name'></h5>
+							<div class='step-filters right'>
+								<span class='btn-floating btn-small waves-effect waves-light blue' status='info' alt='info' title='info'><i class='mdi-action-info-outline'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light green' status='pass' alt='pass' title='pass'><i class='mdi-action-check-circle'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red' status='fail' alt='fail' title='fail'><i class='mdi-navigation-cancel'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red darken-4' status='fatal' alt='fatal' title='fatal'><i class='mdi-navigation-cancel'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red lighten-2' status='error' alt='error' title='error'><i class='mdi-alert-error'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light orange' alt='warning' status='warning' title='warning'><i class='mdi-alert-warning'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light cyan' status='skip' alt='skip' title='skip'><i class='mdi-content-redo'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light grey darken-2' status='clear-step-filter' alt='Clear filters' title='Clear filters'><i class='mdi-content-clear'></i></span>
+							</div>
+							<div class='details-container'>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /tests -->
+			
+			<!-- categories -->
+			<!-- /categories -->
+			
+			<!-- exceptions -->
+			<!-- /exceptions -->
+			
+			<!-- testrunner logs -->
+			<!-- /testrunner logs -->
+			
+		</div>
+		<!-- /container -->
+		
+		<!-- test dashboard counts setting -->
+		<div id='test-count-setting' class='modal bottom-sheet'> 
+			<div class='modal-content'> 
+				<h5>Configure Tests Count Setting</h5> 
+				<input name='test-count-setting' type='radio' id='parentWithoutNodes' class='with-gap'> 
+				<label for='parentWithoutNodes'>Parent Tests Only (Does not include child nodes in counts)</label> 
+				<br> 
+				<input name='test-count-setting' type='radio' id='parentWithoutNodesAndNodes' class='with-gap'> 
+				<label for='parentWithoutNodesAndNodes'>Parent Tests Without Child Tests + Child Tests</label> 
+				<br> 
+				<input name='test-count-setting' type='radio' id='childNodes' class='with-gap'> 
+				<label for='childNodes'>Child Tests Only</label> 
+			</div> 
+			<div class='modal-footer'> 
+				<a href='#!' class='modal-action modal-close waves-effect waves-green btn'>Save</a> 
+			</div> 
+		</div>
+		<!-- /test dashboard counts setting -->
+		
+		<!-- filter for step status -->
+		<div id='step-status-filter' class='modal bottom-sheet'> 
+			<div class='modal-content'> 
+				<h5>Select status</h5> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-pass'> 
+				<label for='step-dashboard-filter-pass'>Pass</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-fail'> 
+				<label for='step-dashboard-filter-fail'>Fail</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-fatal'> 
+				<label for='step-dashboard-filter-fatal'>Fatal</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-error'> 
+				<label for='step-dashboard-filter-error'>Error</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-warning'> 
+				<label for='step-dashboard-filter-warning'>Warning</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-skip'> 
+				<label for='step-dashboard-filter-skip'>Skipped</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-info'> 
+				<label for='step-dashboard-filter-info'>Info</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-unknown'> 
+				<label for='step-dashboard-filter-unknown'>Unknown</label> 
+			</div>
+			<div class='modal-footer'> 
+				<a href='#!' class='modal-action modal-close waves-effect waves-green btn'>Save</a> 
+			</div> 
+		</div>
+		<!-- /filter for step status -->
+		
+		<script src='https://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.js' type='text/javascript'></script>
+
+		<script>$(document).ready(function() { $('.logo span').html('ExtentReports'); });</script>
+		<script>
+				
+            
+                $(document).ready(function() {
+                    
+                });
+            
+        
+		</script>
+	</body>
+</html>
