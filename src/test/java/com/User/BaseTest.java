@@ -17,26 +17,25 @@ import com.Utility.TestDataUtils;
 import io.restassured.RestAssured;
 
 @Listeners(ReportListner.class)
-public class BaseTest extends ReportListner{
-	
+public class BaseTest extends ReportListner {
+
 	HeaderConfig header = new HeaderConfig();
 	RequestBody builder = new RequestBody();
 	TestDataUtils utils = new TestDataUtils();
 	String errorMessage = null;
-	String filePath=System.getProperty("user.dir")+"/"+"Zeel-cover-02.jpg";
+	String filePath = System.getProperty("user.dir") + "/" + "Zeel-cover-02.jpg";
 	File testUploadFile = new File(filePath);
-	
-	  @BeforeSuite public void def_baseUrl() throws IOException
-	  
-	  {
-	  
-	  RestAssured.baseURI=EnvironmentDataMapper.envAndFile().get("baseUrl");
-	  
-	  }
-	  
-	  @AfterSuite public void SM() {
-	  
-	  EmailReports ER = new EmailReports(); ER.sendMail(); }
-	 
 
+	@BeforeSuite
+	public void def_baseUrl() throws IOException
+
+	{
+		RestAssured.baseURI = EnvironmentDataMapper.envAndFile().get("baseUrl");
+	}
+
+	@AfterSuite
+	public void SM() {
+		EmailReports ER = new EmailReports();
+		ER.sendMail();
+	}
 }
