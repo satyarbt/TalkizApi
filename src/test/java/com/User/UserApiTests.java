@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.ApiConfig.ApiPath;
+import com.DataMapper.EnvironmentDataMapper;
 import com.Reports.ReportListner;
 import com.ResponseDataMapper.CreateUserMapper;
 import com.ResponseDataMapper.DeleteBankDetailsMapper;
@@ -31,10 +32,12 @@ import io.restassured.response.Response;
 @Listeners(ReportListner.class)
 public class UserApiTests extends BaseTest{
 	
+ 
 		
 	@Test(priority = 0, description = "Verify createUser API StatusCode, ResponseTime and Nodes")
 	public void POST_CreateAUser() throws Exception {
-
+ 
+		
 		test.log(LogStatus.INFO, "API test has been started...");
 		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
 				.body(builder.RequestBody_Login()).when().post(ApiPath.path.POST_USERS_TO_CREATE_USER);

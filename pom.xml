@@ -26,6 +26,13 @@
 			<artifactId>testng</artifactId>
 			<version>7.1.0</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.0-rc1</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 		<dependency>
@@ -154,8 +161,8 @@
 					<artifactId>maven-site-plugin</artifactId>
 					<version>3.7.1</version>
 				</plugin>
-				
-				
+
+
 			</plugins>
 		</pluginManagement>
 	</build>
