@@ -117,7 +117,7 @@ public class RequestBody {
 		Map<String, String> body=new HashMap<String, String>();
 		String Filepath=System.getProperty("user.dir");
 		System.out.println(Filepath);
-		body.put("file", Filepath+"/"+EnvironmentDataMapper.envAndFile().get("file"));
+		//body.put("file", Filepath+"/"+EnvironmentDataMapper.envAndFile().get("file"));
 		return body;
 	}
 	

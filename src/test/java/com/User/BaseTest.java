@@ -23,7 +23,8 @@ public class BaseTest extends ReportListner{
 	RequestBody builder = new RequestBody();
 	TestDataUtils utils = new TestDataUtils();
 	String errorMessage = null;
-	File testUploadFile = new File(System.getProperty("user.dir") + "/" + EnvironmentDataMapper.fileandenv.get("file"));
+	String filePath=System.getProperty("user.dir")+"/"+"Zeel-cover-02.jpg";
+	File testUploadFile = new File(filePath);
 	
 	  @BeforeSuite public void def_baseUrl() throws IOException
 	  
