@@ -26,7 +26,7 @@
 			<artifactId>testng</artifactId>
 			<version>7.1.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -77,6 +77,12 @@
 			<artifactId>json-path</artifactId>
 			<version>4.3.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
@@ -125,12 +131,13 @@
 
 				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-					<configuration>
-						<fork>true</fork>
-						<executable>C:\Program Files\Java\jdk-14.0.1\bin\javac.exe</executable>
-					</configuration>
+					<version>3.8.1</version>
+					<!-- <configuration> -->
+					<!-- <fork>true</fork> -->
+					<!-- <executable>C:\Program Files\Java\jdk-14.0.1\bin\javac.exe</executable> -->
+					<!-- </configuration> -->
 				</plugin>
 
 				<plugin>
