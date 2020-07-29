@@ -1,11 +1,9 @@
 package com.User;
 
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.ApiConfig.ApiPath;
-import com.DataMapper.EnvironmentDataMapper;
 import com.Reports.ReportListner;
 import com.ResponseDataMapper.CreateUserMapper;
 import com.ResponseDataMapper.DeleteBankDetailsMapper;
@@ -24,9 +22,9 @@ import com.ResponseDataMapper.UpdateProfileMapper;
 import com.ResponseDataMapper.UpdateUPIDetailsMapper;
 import com.ResponseDataMapper.VerifyOTPUsernameMapper;
 import com.ResponseValidator.ResponseValidation;
+import com.SaveResponseData.CaptureResponseNodeValue;
 import com.relevantcodes.extentreports.LogStatus;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 @Listeners(ReportListner.class)
@@ -39,13 +37,7 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
 				.body(builder.RequestBody_Login()).when().post(ApiPath.path.POST_USERS_TO_CREATE_USER);
 
-		JsonPath JsPathEvaluator = response.jsonPath();
-		int user_id = JsPathEvaluator.get("user_id");
-		System.out.println(user_id);
-		PropertiesConfiguration config = new PropertiesConfiguration(
-				System.getProperty("user.dir") + "/TestData/dev.properties");
-		config.setProperty("user_id", user_id);
-		config.save();
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
 
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
@@ -89,13 +81,7 @@ public class UserApiTests extends BaseTest {
 		ResponseValidation.responseCodeValidation(response, 200);
 
 		// Update user_id in properties file
-		JsonPath JsPathEvaluator = response.jsonPath();
-		String token = JsPathEvaluator.get("token");
-		System.out.println(token);
-		PropertiesConfiguration config = new PropertiesConfiguration(
-				System.getProperty("user.dir") + "/TestData/dev.properties");
-		config.setProperty("token", token);
-		config.save();
+		CaptureResponseNodeValue.saveStringNodeValue(response, "token", "token");
 
 		// Response Nodes Check
 		int length_nodes = VerifyOTPUsernameMapper.OTPUsername_ResponseNodes().size();
@@ -349,6 +335,8 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
 				.queryParams(builder.QueryParams_UsersFollowingMe()).when().get(ApiPath.path.GET_USERS_FOLLOWING_ME);
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "OtherUser_id");
 
 		// Response code check
 		ResponseValidation.responseCodeValidation(response, 200);
