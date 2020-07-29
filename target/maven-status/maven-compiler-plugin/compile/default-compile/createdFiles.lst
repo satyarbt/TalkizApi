@@ -16,6 +16,7 @@ com\ResponseDataMapper\VerifyOTPUsernameMapper.class
 com\ResponseDataMapper\UpdateProfileMapper.class
 com\ResponseDataMapper\GetUserProfileMapper.class
 com\ResponseDataMapper\VerifyUserNameMapper.class
+com\SaveResponseData\CaptureResponseNodeValue.class
 com\ResponseDataMapper\UpdateProfileImageMapper.class
 com\DataMapper\TestSummaryMapper.class
 com\ResponseDataMapper\DeviceRegisterMapper.class
