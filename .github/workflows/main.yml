@@ -5,6 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
-        uses: "pascalgn/automerge-action@ef030fabb510b9a5a3bc2e3a0123638e11e72541"
+        uses: sudo-bot/action-pull-request-merge@v1.1.1
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
