@@ -1,10 +1,11 @@
 name: merge a pull request with message and body (optional)
-uses: sudo-bot/action-pull-request-merge@v1.1.1
-    with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        number: ${{ github.event.pull_request.number }}
-        merge-method: merge
-        allowed-usernames-regex: ^satya$
-        filter-label: merge-it
-        merge-title: Merge #${{ github.event.pull_request.number }}
-        merge-message: Merge #${{ github.event.pull_request.number }}
+on: [pull_request, pull_request_review, status]
+jobs:
+   automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: sudo-bot/action-pull-request-merge@v1.1.
+        env:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+           
