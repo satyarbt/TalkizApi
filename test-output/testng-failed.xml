@@ -5,10 +5,13 @@
     <classes>
       <class name="com.User.UserApiTests">
         <methods>
-          <include name="PUT_UpdateProfileImage"/>
+          <include name="POST_verifyOTP_Nodes"/>
+          <include name="PUT_UpdateUpiDetails_Nodes"/>
+          <include name="POST_CreateAUser_StatusCode_Time"/>
+          <include name="PUT_UpdateProfile_Nodes"/>
+          <include name="GET_BankDetails_Nodes"/>
           <include name="SM"/>
-          <include name="POST_CreateAUser"/>
-          <include name="PUT_UpdateProfile"/>
+          <include name="POST_DeleteBankDetails_Nodes"/>
           <include name="def_baseUrl"/>
         </methods>
       </class> <!-- com.User.UserApiTests -->

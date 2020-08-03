@@ -1,5 +1,7 @@
 package com.SaveResponseData;
 
+import java.util.Properties;
+
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.testng.annotations.Listeners;
@@ -14,6 +16,7 @@ import io.restassured.response.Response;
 public class CaptureResponseNodeValue extends ReportListner {
 	
 	EnvironmentDataMapper prop = new EnvironmentDataMapper();
+	
 
 	public static void saveIntegerNodeValue(Response response, String key, String propKey) throws ConfigurationException {
 	
@@ -37,7 +40,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 					config.setProperty(propKey, Node);
 					config.save();
 				}
-			}catch(Exception e)
+			}catch(ConfigurationException e)
 			{
 				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
@@ -54,6 +57,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 		System.out.println(Node);
 		String environment = System.getProperty("env");
 		
+		
 		try {
 			if (environment.equalsIgnoreCase("dev")) {
 		PropertiesConfiguration config = new PropertiesConfiguration(
@@ -68,7 +72,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 				config.setProperty(propKey, Node);
 				config.save();
 			}
-		}catch(Exception e)
+		}catch(ConfigurationException e)
 		{
 			test.log(LogStatus.FAIL, e.fillInStackTrace());
 		}

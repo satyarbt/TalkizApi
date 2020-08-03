@@ -1,8 +1,6 @@
 package com.Reports;
 
 import java.io.File;
-import java.io.IOException;
-
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.testng.ITestContext;
@@ -54,7 +52,9 @@ public class ReportListner implements ITestListener {
 		System.out.println(result.getMethod().getDescription());
 	}
 
-	public void onTestSuccess(ITestResult result) throws NullPointerException {
+	public void onTestSuccess(ITestResult result) {
+		
+		//test.log(LogStatus.PASS, result.getThrowable().getMessage());
 
 		test.log(LogStatus.PASS, "Test Passed");
 
@@ -62,7 +62,7 @@ public class ReportListner implements ITestListener {
 
 	public void onTestFailure(ITestResult result) {
 
-		test.log(LogStatus.FAIL, result.getThrowable().getMessage());
+		test.log(LogStatus.FAIL, result.getThrowable().fillInStackTrace());
 		test.log(LogStatus.FAIL, "Test Failed");
 
 	}
@@ -73,14 +73,13 @@ public class ReportListner implements ITestListener {
 	}
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		// TODO Auto-generated method stub
-
-	}
+	 // TODO Auto-generated method stub
+	  
+	  }
 
 	public void onStart(ITestContext context) {
 		if (reports == null) {
-			reports = new ExtentReports(ReportLocation + "Talkiz_Api_Report.html", true,
-					DisplayOrder.NEWEST_FIRST);
+			reports = new ExtentReports(ReportLocation + "Talkiz_Api_Report.html", true, DisplayOrder.NEWEST_FIRST);
 			// reports.loadConfig(new
 			// File(System.getProperty("user.dir")+"//extent-config.xml"));
 

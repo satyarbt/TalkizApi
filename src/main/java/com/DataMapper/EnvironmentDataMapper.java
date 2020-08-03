@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class EnvironmentDataMapper {
+import org.testng.annotations.Listeners;
+
+import com.Reports.ReportListner;
+import com.relevantcodes.extentreports.LogStatus;
+@Listeners(ReportListner.class)
+public class EnvironmentDataMapper extends ReportListner{
 
 	public static Map<String, String> fileandenv = new HashMap<String, String>();
 	public static Properties propMain = new Properties();
@@ -21,31 +26,31 @@ public class EnvironmentDataMapper {
 						System.getProperty("user.dir") + "/TestData/dev.properties");
 				propMain.load(fisDev);
 				fileandenv.put("baseUrl", propMain.getProperty("baseUrl"));
-				fileandenv.put("deviceType_Android", propMain.getProperty("deviceType_Android"));
-				fileandenv.put("deviceType_IOS", propMain.getProperty("deviceType_IOS"));
-				fileandenv.put("phoneNumber", propMain.getProperty("phoneNumber"));
-				fileandenv.put("phoneNumber_Existing", propMain.getProperty("phoneNumber_Existing"));
+				//fileandenv.put("deviceType_Android", propMain.getProperty("deviceType_Android"));
+				fileandenv.put("deviceType", propMain.getProperty("deviceType"));
+				//fileandenv.put("phoneNumber", propMain.getProperty("phoneNumber"));
+				fileandenv.put("mobile", propMain.getProperty("mobile"));
 				fileandenv.put("baseToken", propMain.getProperty("baseToken"));
-				fileandenv.put("deviceID", propMain.getProperty("device_ID"));
-				fileandenv.put("deviceToken", propMain.getProperty("device_Token"));
+				fileandenv.put("device_id", propMain.getProperty("device_id"));
+				fileandenv.put("device_Token", propMain.getProperty("device_Token"));
 				fileandenv.put("user_id", propMain.getProperty("user_id"));
 				fileandenv.put("otp", propMain.getProperty("otp"));
 				fileandenv.put("device_location", propMain.getProperty("device_location"));
 				fileandenv.put("under18", propMain.getProperty("under18"));
-				fileandenv.put("phoneNumber_Existing", propMain.getProperty("phoneNumber_Existing"));
+				//fileandenv.put("phoneNumber_Existing", propMain.getProperty("phoneNumber_Existing"));
 				fileandenv.put("ResponseTime", propMain.getProperty("ResponseTime"));
 				fileandenv.put("token", propMain.getProperty("token"));
-				fileandenv.put("id", propMain.getProperty("OtherUser_id"));
+				fileandenv.put("id", propMain.getProperty("id"));
 				fileandenv.put("full_name", propMain.getProperty("full_name"));
 				fileandenv.put("dob", propMain.getProperty("dob"));
 				fileandenv.put("email", propMain.getProperty("email"));
 				fileandenv.put("gender", propMain.getProperty("gender"));
-				fileandenv.put("mobile", propMain.getProperty("phoneNumber_Existing"));
+				//fileandenv.put("mobile", propMain.getProperty("phoneNumber_Existing"));
 				fileandenv.put("display_language", propMain.getProperty("display_language"));
 				fileandenv.put("file", propMain.getProperty("file"));
-				fileandenv.put("transaction_source_upi", propMain.getProperty("transaction_source_upi"));
-				fileandenv.put("upi", propMain.getProperty("upiID"));
-				fileandenv.put("transaction_source_bank", propMain.getProperty("transaction_source_bank"));
+				fileandenv.put("transaction_source", propMain.getProperty("transaction_source"));
+				fileandenv.put("upi", propMain.getProperty("upi"));
+				//fileandenv.put("transaction_source_bank", propMain.getProperty("transaction_source_bank"));
 				fileandenv.put("bank_account_full_name", propMain.getProperty("bank_account_full_name"));
 				fileandenv.put("accountNumber", propMain.getProperty("accountNumber"));
 				fileandenv.put("ifscCode", propMain.getProperty("ifscCode"));
@@ -59,7 +64,7 @@ public class EnvironmentDataMapper {
 				fileandenv.put("deviceType_Android", propMain.getProperty("deviceType_Android"));
 				fileandenv.put("deviceType_IOS", propMain.getProperty("deviceType_IOS"));
 				fileandenv.put("phoneNumber", propMain.getProperty("phoneNumber"));
-				fileandenv.put("phoneNumber_Existing", propMain.getProperty("phoneNumber_Existing"));
+				fileandenv.put("phoneNumber_Existing", propMain.getProperty("mobile"));
 				fileandenv.put("baseToken", propMain.getProperty("baseToken"));
 				fileandenv.put("deviceID", propMain.getProperty("device_ID"));
 				fileandenv.put("deviceToken", propMain.getProperty("device_Token"));
@@ -89,7 +94,7 @@ public class EnvironmentDataMapper {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			test.log(LogStatus.FAIL, e.fillInStackTrace());
 		}
 
 		return fileandenv;
