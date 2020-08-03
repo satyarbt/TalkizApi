@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="ExistingUser(failed)">
+    <groups>
+      <run>
+        <include name="UserExisting"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.User.GetOtherUserProfile">
+        <methods>
+          <include name="GET_OtherUserProfile"/>
+        </methods>
+      </class> <!-- com.User.GetOtherUserProfile -->
+      <class name="com.User.UpdateUpiDetails">
+        <methods>
+          <include name="PUT_UpdateUpiDetails"/>
+        </methods>
+      </class> <!-- com.User.UpdateUpiDetails -->
+      <class name="com.User.UnfollowUser">
+        <methods>
+          <include name="POST_UnfollowUser"/>
+        </methods>
+      </class> <!-- com.User.UnfollowUser -->
+      <class name="com.User.UpdatePreferences">
+        <methods>
+          <include name="PUT_UpdatePreferencee"/>
+        </methods>
+      </class> <!-- com.User.UpdatePreferences -->
+      <class name="com.User.GetPreferences">
+        <methods>
+          <include name="GET_GetPreferencee"/>
+        </methods>
+      </class> <!-- com.User.GetPreferences -->
+      <class name="com.User.DeleteBankDetails">
+        <methods>
+          <include name="POST_DeleteBankDetails"/>
+        </methods>
+      </class> <!-- com.User.DeleteBankDetails -->
+      <class name="com.User.GetBankDetails">
+        <methods>
+          <include name="GET_BankDetails"/>
+        </methods>
+      </class> <!-- com.User.GetBankDetails -->
+      <class name="com.User.UpdateBankDetails">
+        <methods>
+          <include name="PUT_UpdateBankDetails"/>
+        </methods>
+      </class> <!-- com.User.UpdateBankDetails -->
+      <class name="com.User.DeleteUpiDetails">
+        <methods>
+          <include name="POST_DeleteUpiDetails"/>
+        </methods>
+      </class> <!-- com.User.DeleteUpiDetails -->
+      <class name="com.User.UpdateProfile">
+        <methods>
+          <include name="PUT_UpdateProfile"/>
+        </methods>
+      </class> <!-- com.User.UpdateProfile -->
+      <class name="com.User.UserLoginTest">
+        <methods>
+          <include name="POST_CreateAUser"/>
+        </methods>
+      </class> <!-- com.User.UserLoginTest -->
+      <class name="com.User.FollowUser">
+        <methods>
+          <include name="POST_FollowUser"/>
+        </methods>
+      </class> <!-- com.User.FollowUser -->
+      <class name="com.User.VerifyOTP">
+        <methods>
+          <include name="POST_verifyOTP"/>
+        </methods>
+      </class> <!-- com.User.VerifyOTP -->
+      <class name="com.User.UpdateProfileImage">
+        <methods>
+          <include name="PUT_UpdateProfileImage"/>
+        </methods>
+      </class> <!-- com.User.UpdateProfileImage -->
+      <class name="com.User.GetProfile">
+        <methods>
+          <include name="GET_getProfile"/>
+        </methods>
+      </class> <!-- com.User.GetProfile -->
+      <class name="com.User.GetUsersFollowingMe">
+        <methods>
+          <include name="GET_UsersFollowingMe"/>
+        </methods>
+      </class> <!-- com.User.GetUsersFollowingMe -->
+    </classes>
+  </test> <!-- ExistingUser(failed) -->
+</suite> <!-- Failed suite [Suite] -->

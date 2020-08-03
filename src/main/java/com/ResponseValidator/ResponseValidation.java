@@ -1,8 +1,14 @@
 package com.ResponseValidator;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
+import org.testng.asserts.SoftAssert;
+
 import com.DataMapper.EnvironmentDataMapper;
 import com.Reports.ReportListner;
 import com.relevantcodes.extentreports.LogStatus;
@@ -13,54 +19,77 @@ import junit.framework.AssertionFailedError;
 public class ResponseValidation extends ReportListner {
 
 	EnvironmentDataMapper prop = new EnvironmentDataMapper();
+	
 
 	public static void responseCodeValidation(Response response, int statusCode) {
-		try {
 
+		
 			Assert.assertEquals(response.getStatusCode(), statusCode, "Getting status code " + response.getStatusCode()
 					+ " instead of expected status code " + statusCode);
 			test.log(LogStatus.PASS, "Status code " + statusCode + " validated successfully");
 
-		} catch (AssertionFailedError | NullPointerException e) {
-
-			test.log(LogStatus.FAIL, "Getting status code " + response.getStatusCode()
-					+ " instead of expected status code " + statusCode);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-		}
+			/*
+			 * } catch (AssertionFailedError | Exception e) { test.log(LogStatus.FAIL,
+			 * "Getting status code " + response.getStatusCode() +
+			 * " instead of expected status code " + statusCode);
+			 * 
+			 * }
+			 */
 	}
 
-	public static void responseKeyValidation(Response response, String key) throws Exception {
+	public static void responseKeyValidation(Response response, String fileName) throws IOException {
 
+		SoftAssert softAssert=new SoftAssert();
 		String res = response.getBody().asString();
+		Properties propData = new Properties();
+		FileInputStream nodeData = new FileInputStream(
+				System.getProperty("user.dir") + "/TestData/" + fileName + ".properties");
+		propData.load(nodeData);
+		int i = 1;
+		int errorCount=0;
+		int length_nodes = propData.size();
 		try {
-			Assert.assertTrue(res.contains(key), key + " node is not present in the response body");
-
-			test.log(LogStatus.PASS, key + " node present in the response body");
-
-		} catch (AssertionFailedError | NullPointerException e) {
-			test.log(LogStatus.FAIL, key + " node is not present in the response body");
-
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-
+			for (i = 1; i <= length_nodes; i++) {
+				softAssert.assertTrue(res.contains(propData.getProperty("Node" + i)),
+						propData.getProperty("Node" + i) + " node is not present in the response body");
+				//test.log(LogStatus.PASS, prop.getProperty("Node" + i) + " node is present in the response body");
+	
+			}
+			softAssert.assertAll();
+		}catch(AssertionFailedError | Exception e)
+		{
+			
+			Assert.fail("Test Failed");//Throwable error1=e.fillInStackTrace();
+			errorCount=errorCount+1;
 		}
+if(errorCount>0)
+{
+	test.log(LogStatus.FAIL,  "Test Failed");
+}
+		
 
 	}
 
-	public static void responseTimeValidation(Response response) throws Exception {
-		long actualTime = response.getTime();
-		try {
-			String ExpectedTime = EnvironmentDataMapper.fileandenv.get("ResponseTime");
-			int ET = Integer.parseInt(ExpectedTime);
+	public static void responseTimeValidation(Response response) {
+
+		// TimeUnit tu=TimeUnit.MILLISECONDS;
+		long actualTime = response.getTimeIn(TimeUnit.MILLISECONDS);
+		String ExpectedTime = EnvironmentDataMapper.fileandenv.get("ResponseTime");
+		long ET = Long.valueOf(ExpectedTime);
+
+		//try {
+
 			Assert.assertTrue(actualTime <= ET,
-					"Time allocated " + actualTime + "ms is greater than expected time " + 500 + "ms");
-			test.log(LogStatus.PASS, "Time allocated " + actualTime + "ms is less than expected time " + 500 + "ms");
-		} catch (AssertionFailedError | NullPointerException e) {
-			test.log(LogStatus.FAIL, "Time allocated " + actualTime + "ms is greater than expected time " + 500 + "ms");
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-		}
-	}
+					"Time allocated " + actualTime + "ms is greater than expected time " + ET + "ms");
+			test.log(LogStatus.PASS,
+					"Time allocated " + actualTime + "ms is less than expected time " + ET + "ms");
 
+			/*
+			 * } catch (AssertionFailedError | Exception e) { test.log(LogStatus.FAIL,
+			 * e.fillInStackTrace());
+			 * 
+			 * }
+			 */
+
+	}
 }

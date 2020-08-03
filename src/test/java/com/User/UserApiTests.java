@@ -1,610 +1,652 @@
 package com.User;
-
-import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.ApiConfig.ApiPath;
+import org.testng.annotations.Listeners;
+import com.DataMapper.ApiPathMapper;
 import com.Reports.ReportListner;
-import com.ResponseDataMapper.CreateUserMapper;
-import com.ResponseDataMapper.DeleteBankDetailsMapper;
-import com.ResponseDataMapper.DeleteUpiDetailsMapper;
-import com.ResponseDataMapper.FollowUserMapper;
-import com.ResponseDataMapper.GetBankDetailsMapper;
-import com.ResponseDataMapper.GetPreferenceMapper;
-import com.ResponseDataMapper.GetProfileMapper;
-import com.ResponseDataMapper.GetUserProfileMapper;
-import com.ResponseDataMapper.GetUsersFollowingMe;
-import com.ResponseDataMapper.UnfollowUserMapper;
-import com.ResponseDataMapper.UpdateBankDetailsMapper;
-import com.ResponseDataMapper.UpdatePreferenceMapper;
-import com.ResponseDataMapper.UpdateProfileImageMapper;
-import com.ResponseDataMapper.UpdateProfileMapper;
-import com.ResponseDataMapper.UpdateUPIDetailsMapper;
-import com.ResponseDataMapper.VerifyOTPUsernameMapper;
 import com.ResponseValidator.ResponseValidation;
 import com.SaveResponseData.CaptureResponseNodeValue;
 import com.relevantcodes.extentreports.LogStatus;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import junit.framework.AssertionFailedError;
 
 @Listeners(ReportListner.class)
 public class UserApiTests extends BaseTest {
 
-	@Test(priority = 0, description = "Verify createUser API StatusCode, ResponseTime and Nodes")
-	public void POST_CreateAUser() throws Exception {
+	@Test(priority = 0, description = "Verify createUser API StatusCode, ResponseTime")
+	public void POST_CreateAUser_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
-				.body(builder.RequestBody_Login()).when().post(ApiPath.path.POST_USERS_TO_CREATE_USER);
+				.body(builder.RequestBody_CreateUser()).when()
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_TO_CREATE_USER"));
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		try {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
+
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
+			}
+
+	}
+	
+	@Test(priority = 0, description = "Verify createUser API Nodes")
+	public void POST_CreateAUser_Nodes() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
+				.body(builder.RequestBody_CreateUser()).when()
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_TO_CREATE_USER"));
 
 		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
 
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Status Code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
 		// Response nodes check
-		int length_nodes = CreateUserMapper.Usercreation_ResponseNodes().size();
-		int ErrorCount = 0;
-		try {
-			for (int i = 1; i <= length_nodes; i++) {
-
-				ResponseValidation.responseKeyValidation(response, CreateUserMapper.propMain.getProperty("Node" + i));
-			}
-		} catch (AssertionError | Exception e) {
-
-			ErrorCount = ErrorCount + 1;
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
-
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
-
+		ResponseValidation.responseKeyValidation(response, "Nodes_CreateUserAPI");
 	}
 
-	@Test(priority = 1, description = "Verify userName&OTP API Response Code, ResponseTime and Nodes ")
-	public void POST_verifyOTP() throws Exception {
+	@Test(priority = 1, description = "Verify userName&OTP API Response Code, ResponseTime")
+	public void POST_verifyOTP_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
-				.body(builder.RequestBody_VerifyOTPUsername()).when().post(ApiPath.path.POST_USERS_VERIFYOTP);
+				.body(builder.RequestBody_VerifyOTPUsername()).when()
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_VERIFYOTP"));
+
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+		// Update user_id in properties file
+		CaptureResponseNodeValue.saveStringNodeValue(response, "token", "token");	
+		try {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
+			}		
+	}
+	
+	@Test(priority = 1, description = "Verify userName&OTP API Nodes")
+	public void POST_verifyOTP_Nodes() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
+				.body(builder.RequestBody_VerifyOTPUsername()).when()
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_VERIFYOTP"));
 
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// ResponseCode Check
-		ResponseValidation.responseCodeValidation(response, 200);
-
+		
 		// Update user_id in properties file
 		CaptureResponseNodeValue.saveStringNodeValue(response, "token", "token");
 
-		// Response Nodes Check
-		int length_nodes = VerifyOTPUsernameMapper.OTPUsername_ResponseNodes().size();
-		int ErrorCount = 0;
-		try {
-			for (int i = 1; i <= length_nodes; i++) {
-
-				ResponseValidation.responseKeyValidation(response,
-						VerifyOTPUsernameMapper.propMain.getProperty("Node" + i));
-			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
-
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_VerifyotpusernameAPI");
 	}
 
-	@Test(priority = 2, description = "Verify getProfile API StatusCode, Response Time and Nodes")
+	@Test(priority = 2, description = "Verify getProfile API StatusCode, Response Time")
 
-	public void GET_getProfile() throws Exception {
+	public void GET_getProfile_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
-				.get(ApiPath.path.GET_USERS_PROFILE);
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// StatusCode Check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes Check
-		int length_nodes = GetProfileMapper.GetProfile_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response, GetProfileMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+	}
+	
+	
+	@Test(priority = 2, description = "Verify getProfile API Nodes")
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+	public void GET_getProfile_Nodes() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_PROFILE"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_GetProfileAPI");
 
 	}
 
-	@Test(priority = 2, description = "Verify getOtherUserProfile API StatusCode, Response Time and Nodes")
-	public void GET_OtherUserProfile() throws Exception {
+
+	@Test(priority = 2, description = "Verify getOtherUserProfile API StatusCode, Response Time")
+	public void GET_OtherUserProfile_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
 				.queryParams(builder.QueryParams_GetOtherUserProfile()).when()
-				.get(ApiPath.path.GET_USERS_OTHER_PROFILE);
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_OTHER_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-		// StatusCode Check
-		ResponseValidation.responseCodeValidation(response, 200);
 
-		// Response Nodes Check
-		int length_nodes = GetUserProfileMapper.GetUserProfile_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						GetUserProfileMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
-
-		// responseTime Check
-		ResponseValidation.responseTimeValidation(response);
 
 	}
-
-	@Test(priority = 2, description = "Verify response body nodes of getOtherUserProfile API")
-	public void GET_getOtherUserProfile() throws Exception {
+	
+	@Test(priority = 2, description = "Verify getOtherUserProfile API Nodes")
+	public void GET_OtherUserProfile_Nodes() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
 				.queryParams(builder.QueryParams_GetOtherUserProfile()).when()
-				.get(ApiPath.path.GET_USERS_OTHER_PROFILE);
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_OTHER_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
-	}
-
-	@Test(priority = 2, description = "Verify updateProfile API StatusCode, Response Time and Nodes")
-	public void PUT_UpdateProfile() throws Exception {
-
-		test.log(LogStatus.INFO, "API test has been started...");
-		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
-				.body(builder.RequestBody_UpdateProfile()).when().put(ApiPath.path.PUT_USERS_UPDATE_PROFILE);
-		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
-		// StatusCode Check
-		ResponseValidation.responseCodeValidation(response, 200);
 
 		// Response Nodes Check
 
-		int length_nodes = UpdateProfileMapper.UpdateProfile_ResponseNodes().size();
-		int ErrorCount = 0;
-		try {
-			for (int i = 1; i <= length_nodes; i++) {
+		ResponseValidation.responseKeyValidation(response, "Nodes_GetUserProfileAPI");
 
-				ResponseValidation.responseKeyValidation(response,
-						UpdateProfileMapper.propMain.getProperty("Node" + i));
-			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
-
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
 
 	}
 
-	@Test(priority = 2, description = "Verify updatePreference API StatusCode, Response Time and Nodes")
-	public void PUT_UpdatePreferencee() throws Exception {
+	@Test(priority = 2, description = "Verify updateProfile API StatusCode, Response Time")
+	public void PUT_UpdateProfile_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
-				.body(builder.RequestBody_UpdatePreference()).when().put(ApiPath.path.PUT_USERS_UPDATE_PREFERENCES);
+				.body(builder.RequestBody_UpdateProfile()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// StatusCode Check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Node Check
-		int length_nodes = UpdatePreferenceMapper.UpdatePreference_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						UpdatePreferenceMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+		
+	}
+	
+	@Test(priority = 2, description = "Verify updateProfile API Nodes")
+	public void PUT_UpdateProfile_Nodes() throws Exception {
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
+				.body(builder.RequestBody_UpdateProfile()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UpdateProfile");
+
 
 	}
 
-	@Test(priority = 2, description = "Verify getPreference API StatusCode, Response Time and Nodes")
-	public void GET_GetPreferencee() throws Exception {
+	@Test(priority = 2, description = "Verify updatePreference API StatusCode, Response Time")
+	public void PUT_UpdatePreferences_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
+				.body(builder.RequestBody_UpdatePreference()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PREFERENCES"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		try {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
+
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
+			}
+	}
+	
+	@Test(priority = 2, description = "Verify updatePreference API Nodes")
+	public void PUT_UpdatePreference_Nodes() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
+				.body(builder.RequestBody_UpdatePreference()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PREFERENCES"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UpdatePreference");
+
+	}
+
+	@Test(priority = 2, description = "Verify getPreference API StatusCode, Response Time")
+	public void GET_GetPreference_StatusCode_Time() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
-				.get(ApiPath.path.GET_USERS_PREFERENCES);
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_PREFERENCES"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// StatusCode Check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// ResponseNodes Check
-		int length_nodes = GetPreferenceMapper.GetPreference_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						GetPreferenceMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+	}
+	
+	@Test(priority = 2, description = "Verify getPreference API Nodes")
+	public void GET_GetPreference_Nodes() throws Exception {
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_PREFERENCES"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_GetPreference");
+
 
 	}
 
-	@Test(priority = 2, description = "Verify updateProfileImage API StatusCode, Response Time and Nodes")
-	public void PUT_UpdateProfileImage() throws Exception {
+	@Test(priority = 2, description = "Verify updateProfileImage API StatusCode, Response Time")
+	public void PUT_UpdateProfileImage_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().multiPart(testUploadFile).when()
 				.headers(header.HeaderWithMultipartANDUpdatedToken()).when()
-				.put(ApiPath.path.PUT_USERS_UPDATE_PROFILE_IMAGE);
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE_IMAGE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Status code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes check
-		int length_nodes = UpdateProfileImageMapper.UpdateProfileImage_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						UpdateProfileImageMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
+		
+	}
+	
+	@Test(priority = 2, description = "Verify updateProfileImage API Nodes")
+	public void PUT_UpdateProfileImage_Nodes() throws Exception {
 
-		}
+		test.log(LogStatus.INFO, "API test has been started...");
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		Response response = RestAssured.given().multiPart(testUploadFile).when()
+				.headers(header.HeaderWithMultipartANDUpdatedToken()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE_IMAGE"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
+		
+			// Response nodes check
+			ResponseValidation.responseKeyValidation(response, "Nodes_UpdateProfileImage");
+
+		
 	}
 
-	@Test(priority = 2, description = "Verify UsersFollowingMe API StatusCode, Response Time and Nodes ")
+	@Test(priority = 2, description = "Verify UsersFollowingMe API StatusCode, Response Time")
+	public void GET_UsersFollowingMe_StatusCode_Time() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
+				.queryParams(builder.QueryParams_UsersFollowingMe()).when()
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_FOLLOWING_ME"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "id");
+
+		try {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
+
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
+			}
+
+	}
+	
+	@Test(priority = 2, description = "Verify UsersFollowingMe API Nodes ")
 	public void GET_UsersFollowingMe() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
-				.queryParams(builder.QueryParams_UsersFollowingMe()).when().get(ApiPath.path.GET_USERS_FOLLOWING_ME);
+				.queryParams(builder.QueryParams_UsersFollowingMe()).when()
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_FOLLOWING_ME"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "OtherUser_id");
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "id");
 
-		// Response code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Node Check
-		int length_nodes = GetUsersFollowingMe.GetUsersFollowingMe_ResponseNodes().size();
-		int ErrorCount = 0;
-		try {
-			for (int i = 1; i <= length_nodes; i++) {
-
-				ResponseValidation.responseKeyValidation(response,
-						GetUsersFollowingMe.propMain.getProperty("Node" + i));
-			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
-
-		// Response Time check
-		ResponseValidation.responseTimeValidation(response);
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UsersFollowingMe");
 
 	}
 
-	@Test(priority = 2, description = "Verify UpdateUpiDetails API StatusCode, Response Time and Nodes")
-	public void PUT_UpdateUpiDetails() throws Exception {
+	@Test(priority = 2, description = "Verify UpdateUpiDetails API StatusCode, Response Time")
+	public void PUT_UpdateUpiDetails_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
 		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
-				.body(builder.RequestBody_UpdateUPIDetails()).when().put(ApiPath.path.PUT_USERS_SAVE_UPI_DETAILS);
+				.body(builder.RequestBody_UpdateUPIDetails()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Response Code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes Check
-		int length_nodes = UpdateUPIDetailsMapper.UpdateUpi_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						UpdateUPIDetailsMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
-
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
 
 	}
-
-	@Test(priority = 2, description = "Verify UpdateBankDetails API StatusCode, Response Time and Nodes")
-	public void PUT_UpdateBankDetails() throws Exception {
+	
+	@Test(priority = 2, description = "Verify UpdateUpiDetails API Nodes")
+	public void PUT_UpdateUpiDetails_Nodes() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
 		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
-				.body(builder.RequestBody_UpdateBankDetails()).when().put(ApiPath.path.PUT_USERS_SAVE_BANK_DETAILS);
+				.body(builder.RequestBody_UpdateUPIDetails()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Response Code check
-		ResponseValidation.responseCodeValidation(response, 200);
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UpdateUpiDetails");
 
-		// Response Nodes Check
-		int length_nodes = UpdateBankDetailsMapper.UpdateBank_ResponseNodes().size();
-		int ErrorCount = 0;
+		
+	}
+
+	@Test(priority = 2, description = "Verify UpdateBankDetails API StatusCode, Response Time")
+	public void PUT_UpdateBankDetails_StatusCode_Time() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
+				.body(builder.RequestBody_UpdateBankDetails()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_BANK_DETAILS"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						UpdateBankDetailsMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+	}
+	
+	@Test(priority = 2, description = "Verify UpdateBankDetails API Nodes")
+	public void PUT_UpdateBankDetails_Nodes() throws Exception {
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken())
+				.body(builder.RequestBody_UpdateBankDetails()).when()
+				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_BANK_DETAILS"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UpdateBankDetails");
+
+	
 
 	}
 
-	@Test(priority = 3, description = "Verify GetBankDetails API StatusCode, Response Time and Nodes")
-	public void GET_BankDetails() throws Exception {
+	@Test(priority = 3, description = "Verify GetBankDetails API StatusCode, Response Time")
+	public void GET_BankDetails_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken()).when()
-				.get(ApiPath.path.GET_USERS_BANK_DETAILS);
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Response Code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes Check
-		int length_nodes = GetBankDetailsMapper.GetBank_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						GetBankDetailsMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+	}
+	
+	@Test(priority = 3, description = "Verify GetBankDetails API Nodes")
+	public void GET_BankDetails_Nodes() throws Exception {
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken()).when()
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_BANK_DETAILS"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_GetBankDetails");
+
 
 	}
 
-	@Test(priority = 4, description = "Verify DeleteBankDetails API StatusCode, Response Time and Nodes")
-	public void POST_DeleteBankDetails() throws Exception {
+	@Test(priority = 4, description = "Verify DeleteBankDetails API StatusCode, Response Time")
+	public void POST_DeleteBankDetails_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
-				.post(ApiPath.path.DELETE_USERS_BANK_DETAILS);
+				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Response Code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes Check
-		int length_nodes = DeleteBankDetailsMapper.DeleteBank_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						DeleteBankDetailsMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+	}
+	
+	@Test(priority = 4, description = "Verify DeleteBankDetails API Nodes")
+	public void POST_DeleteBankDetails_Nodes() throws Exception {
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
+				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_BANK_DETAILS"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_DeleteBankDetails");
 
 	}
 
-	@Test(priority = 5, description = "Verify DeleteUpiDetails API StatusCode, Response Time and Nodes")
-	public void POST_DeleteUpiDetails() throws Exception {
+	@Test(priority = 5, description = "Verify DeleteUpiDetails API StatusCode, Response Time")
+	public void POST_DeleteUpiDetails_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
-				.post(ApiPath.path.DELETE_USERS_UPI_DETAILS);
+				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Response Code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes Check
-		int length_nodes = DeleteUpiDetailsMapper.DeleteUpi_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response,
-						DeleteUpiDetailsMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
+	}
+	
+	@Test(priority = 5, description = "Verify DeleteUpiDetails API Nodes")
+	public void POST_DeleteUpiDetails_Nodes() throws Exception {
 
-		}
+		test.log(LogStatus.INFO, "API test has been started...");
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
+				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_UPI_DETAILS"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_DeleteUpiDetails");
 
 	}
 
-	@Test(priority = 5, description = "Verify UnfollowUser API StatusCode, Response Time and Nodes")
-	public void POST_UnfollowUser() throws Exception {
+	@Test(priority = 5, description = "Verify UnfollowUser API StatusCode, Response Time")
+	public void POST_UnfollowUser_StatusCode_Time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
-				.post(ApiPath.path.POST_USERS_UNFOLLOW);
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_UNFOLLOW"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		// Response Code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Nodes Check
-		int length_nodes = UnfollowUserMapper.UnfollowUser_ResponseNodes().size();
-		int ErrorCount = 0;
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response, UnfollowUserMapper.propMain.getProperty("Node" + i));
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
 
-		}
+	}
+	
+	@Test(priority = 5, description = "Verify UnfollowUser API Nodes")
+	public void POST_UnfollowUser_Nodes() throws Exception {
 
-		// ResponseTime Check
-		ResponseValidation.responseTimeValidation(response);
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_UNFOLLOW"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UnfollowUser");
+
 
 	}
 
-	@Test(priority = 6, description = "Verify FollowUser API StatusCode, Response Time and Nodes")
-	public void POST_FollowUser() throws Exception {
+	@Test(priority = 6, description = "Verify FollowUser API StatusCode, Response Time")
+	public void POST_FollowUser_StatusCode_time() throws Exception {
 
 		test.log(LogStatus.INFO, "API test has been started...");
+
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
-				.post(ApiPath.path.POST_USERS_FOLLOW);
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_FOLLOW"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
+		try {
 		// Response Code check
 		ResponseValidation.responseCodeValidation(response, 200);
 
-		// Response Nodes Check
-		int length_nodes = FollowUserMapper.FollowUser_ResponseNodes().size();
-		int ErrorCount = 0;
-		try {
-			for (int i = 1; i <= length_nodes; i++) {
-
-				ResponseValidation.responseKeyValidation(response, FollowUserMapper.propMain.getProperty("Node" + i));
-			}
-		} catch (AssertionError | Exception e) {
-			test.log(LogStatus.FAIL, e.fillInStackTrace());
-			errorMessage = e.getLocalizedMessage();
-			ErrorCount = ErrorCount + 1;
-		}
-		if (ErrorCount > 0) {
-			Assert.fail(errorMessage);
-
-		}
 
 		// ResponseTime Check
 		ResponseValidation.responseTimeValidation(response);
+		}catch(AssertionFailedError | Exception e)
+		{
+			test.log(LogStatus.FAIL, e.fillInStackTrace());
+		}
+
+	}
+	
+	@Test(priority = 6, description = "Verify FollowUser API Nodes")
+	public void POST_FollowUser_Nodes() throws Exception {
+
+		test.log(LogStatus.INFO, "API test has been started...");
+
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
+				.post(ApiPathMapper.extendedPath().get("POST_USERS_FOLLOW"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_FollowUser");
 
 	}
 
