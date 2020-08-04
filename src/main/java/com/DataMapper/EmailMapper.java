@@ -30,7 +30,7 @@ public class EmailMapper {
 				emaildata.put("password", propMain.getProperty("password"));
 				emaildata.put("receipient_email", propMain.getProperty("receipient_email"));
 				emaildata.put("projectName", propMain.getProperty("projectName"));
-				
+				emaildata.put("Projectlogo", propMain.getProperty("Projectlogo"));
 				
 		}catch(Exception e)
 		{

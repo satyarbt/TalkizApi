@@ -1,19 +1,7 @@
 package com.User;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
-import org.testng.Assert;
-import java.io.FileInputStream;
-import java.util.Properties;
-
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
 import com.DataMapper.ApiPathMapper;
 import com.Reports.ReportListner;
 import com.ResponseValidator.ResponseValidation;
@@ -22,13 +10,14 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import junit.framework.AssertionFailedError;
 
 @Listeners(ReportListner.class)
 public class GetUsersFollowingMe extends BaseTest {
 	
-	@Test(priority = 2, description = "Verify UsersFollowingMe API StatusCode, Response Time and Nodes ", groups= {"UserExisting"})
-	public void GET_UsersFollowingMe() throws Exception {
-		int ErrorCount = 0;
+	@Test(priority = 2, description = "Verify UsersFollowingMe API StatusCode, Response Time")
+	public void GET_UsersFollowingMe_StatusCode_Time() throws Exception {
+
 		test.log(LogStatus.INFO, "API test has been started...");
 
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
@@ -38,35 +27,34 @@ public class GetUsersFollowingMe extends BaseTest {
 
 		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "id");
 
-		// Response code check
-		ResponseValidation.responseCodeValidation(response, 200);
-
-		// Response Node Check
-		Properties prop = new Properties();
-		FileInputStream updateprofileimage = new FileInputStream(
-				System.getProperty("user.dir") + "/TestData/Nodes_UsersFollowingMe.properties");
-		prop.load(updateprofileimage);
-		int length_nodes = prop.size();
 		try {
-			for (int i = 1; i <= length_nodes; i++) {
+			// Response Code check
+			ResponseValidation.responseCodeValidation(response, 200);
 
-				ResponseValidation.responseKeyValidation(response, prop.getProperty("Node" + i));
-				test.log(LogStatus.PASS, prop.getProperty("Node" + i) + " is present in the response body");
+
+			// ResponseTime Check
+			ResponseValidation.responseTimeValidation(response);
+			}catch(AssertionFailedError | Exception e)
+			{
+				test.log(LogStatus.FAIL, e.fillInStackTrace());
 			}
-			// Response Time check
 
-		} catch (AssertionError | Exception e) {
-			errorMessage = e.getLocalizedMessage();
+	}
+	
+	@Test(priority = 2, description = "Verify UsersFollowingMe API Nodes ")
+	public void GET_UsersFollowingMe() throws Exception {
 
-			ErrorCount = ErrorCount + 1;
-		}
+		test.log(LogStatus.INFO, "API test has been started...");
 
-		if (ErrorCount > 0) {
-			ResponseValidation.responseTimeValidation(response);
-			AssertJUnit.fail(errorMessage);
-		} else {
-			ResponseValidation.responseTimeValidation(response);
-		}
+		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken())
+				.queryParams(builder.QueryParams_UsersFollowingMe()).when()
+				.get(ApiPathMapper.extendedPath().get("GET_USERS_FOLLOWING_ME"));
+		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "id");
+
+		// Response nodes check
+		ResponseValidation.responseKeyValidation(response, "Nodes_UsersFollowingMe");
 
 	}
 

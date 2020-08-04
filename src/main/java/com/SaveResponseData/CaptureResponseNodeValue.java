@@ -1,7 +1,5 @@
 package com.SaveResponseData;
 
-import java.util.Properties;
-
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.testng.annotations.Listeners;
@@ -30,6 +28,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 				if (environment.equalsIgnoreCase("dev")) {
 			PropertiesConfiguration config = new PropertiesConfiguration(
 					System.getProperty("user.dir") + "/TestData/dev.properties");
+			test.log(LogStatus.INFO, propKey+":"+Node);
 			config.setProperty(propKey, Node);
 			config.save();
 				}
@@ -37,6 +36,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 				{
 					PropertiesConfiguration config = new PropertiesConfiguration(
 							System.getProperty("user.dir") + "/TestData/production.properties");
+					test.log(LogStatus.INFO, propKey+":"+Node);
 					config.setProperty(propKey, Node);
 					config.save();
 				}
@@ -62,6 +62,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 			if (environment.equalsIgnoreCase("dev")) {
 		PropertiesConfiguration config = new PropertiesConfiguration(
 				System.getProperty("user.dir") + "/TestData/dev.properties");
+		test.log(LogStatus.INFO, propKey+":"+Node);
 		config.setProperty(propKey, Node);
 		config.save();
 			}
@@ -69,6 +70,7 @@ public class CaptureResponseNodeValue extends ReportListner {
 			{
 				PropertiesConfiguration config = new PropertiesConfiguration(
 						System.getProperty("user.dir") + "/TestData/production.properties");
+				test.log(LogStatus.INFO, propKey+":"+Node);
 				config.setProperty(propKey, Node);
 				config.save();
 			}

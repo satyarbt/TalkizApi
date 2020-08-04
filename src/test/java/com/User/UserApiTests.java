@@ -21,8 +21,10 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.defaultHeaderWithToken())
 				.body(builder.RequestBody_CreateUser()).when()
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_TO_CREATE_USER"));
-		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+		test.log(LogStatus.INFO, "Capturing response node user_id value");
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
+		test.log(LogStatus.INFO, "verifying the StatusCode");
 
 		try {
 			// Response Code check
@@ -30,6 +32,7 @@ public class UserApiTests extends BaseTest {
 
 
 			// ResponseTime Check
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
 			{
@@ -47,10 +50,10 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_CreateUser()).when()
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_TO_CREATE_USER"));
 
-		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
-
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Capturing response node user_id value");
+		CaptureResponseNodeValue.saveIntegerNodeValue(response, "user_id", "user_id");
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_CreateUserAPI");
 	}
@@ -65,11 +68,14 @@ public class UserApiTests extends BaseTest {
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_VERIFYOTP"));
 
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-		// Update user_id in properties file
+		test.log(LogStatus.INFO, "Capturing the token value");
+		// Update token in properties file
 		CaptureResponseNodeValue.saveStringNodeValue(response, "token", "token");	
+		test.log(LogStatus.INFO, "verifying the StatusCode");
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -89,7 +95,7 @@ public class UserApiTests extends BaseTest {
 
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		
+		test.log(LogStatus.INFO, "Capturing the token value");
 		// Update user_id in properties file
 		CaptureResponseNodeValue.saveStringNodeValue(response, "token", "token");
 
@@ -106,12 +112,12 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -172,7 +178,7 @@ public class UserApiTests extends BaseTest {
 				.queryParams(builder.QueryParams_GetOtherUserProfile()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_OTHER_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response Nodes Check
 
 		ResponseValidation.responseKeyValidation(response, "Nodes_GetUserProfileAPI");
@@ -189,12 +195,12 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdateProfile()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -214,7 +220,7 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdateProfile()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_UpdateProfile");
 
@@ -230,12 +236,13 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdatePreference()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PREFERENCES"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -253,7 +260,7 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdatePreference()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PREFERENCES"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_UpdatePreference");
 
@@ -267,11 +274,12 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_PREFERENCES"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
@@ -290,7 +298,7 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_PREFERENCES"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_GetPreference");
 
@@ -306,11 +314,12 @@ public class UserApiTests extends BaseTest {
 				.headers(header.HeaderWithMultipartANDUpdatedToken()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE_IMAGE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
@@ -331,7 +340,7 @@ public class UserApiTests extends BaseTest {
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_UPDATE_PROFILE_IMAGE"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 			// Response nodes check
 			ResponseValidation.responseKeyValidation(response, "Nodes_UpdateProfileImage");
 
@@ -347,13 +356,14 @@ public class UserApiTests extends BaseTest {
 				.queryParams(builder.QueryParams_UsersFollowingMe()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_FOLLOWING_ME"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Capturing other user_id");
 		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "id");
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
@@ -373,9 +383,9 @@ public class UserApiTests extends BaseTest {
 				.queryParams(builder.QueryParams_UsersFollowingMe()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_FOLLOWING_ME"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Capturing other user_id");
 		CaptureResponseNodeValue.saveIntegerNodeValue(response, "[0].user_id", "id");
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_UsersFollowingMe");
 
@@ -389,12 +399,13 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdateUPIDetails()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+	
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -412,7 +423,7 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdateUPIDetails()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_UpdateUpiDetails");
 
@@ -428,12 +439,13 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdateBankDetails()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -452,7 +464,7 @@ public class UserApiTests extends BaseTest {
 				.body(builder.RequestBody_UpdateBankDetails()).when()
 				.put(ApiPathMapper.extendedPath().get("PUT_USERS_SAVE_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_UpdateBankDetails");
@@ -469,10 +481,11 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.DefalutHeaderWithUpdatedToken()).when()
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
-		try {
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+				try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 
 
 			// ResponseTime Check
@@ -493,7 +506,7 @@ public class UserApiTests extends BaseTest {
 				.get(ApiPathMapper.extendedPath().get("GET_USERS_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
 
-		
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_GetBankDetails");
 
@@ -508,12 +521,13 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -531,7 +545,7 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_BANK_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_DeleteBankDetails");
@@ -546,11 +560,12 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
+		test.log(LogStatus.INFO, "verifying the StatusCode");
 
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
@@ -568,7 +583,7 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("DELETE_USERS_UPI_DETAILS"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_DeleteUpiDetails");
 
@@ -582,12 +597,13 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_UNFOLLOW"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+		
 		try {
 			// Response Code check
 			ResponseValidation.responseCodeValidation(response, 200);
 
-
+			test.log(LogStatus.INFO, "verifying the ResponseTime");
 			// ResponseTime Check
 			ResponseValidation.responseTimeValidation(response);
 			}catch(AssertionFailedError | Exception e)
@@ -605,7 +621,7 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_UNFOLLOW"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_UnfollowUser");
@@ -621,10 +637,11 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_FOLLOW"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
-		try {
+		test.log(LogStatus.INFO, "verifying the StatusCode");
+				try {
 		// Response Code check
 		ResponseValidation.responseCodeValidation(response, 200);
+		test.log(LogStatus.INFO, "verifying the ResponseTime");
 
 
 		// ResponseTime Check
@@ -644,7 +661,7 @@ public class UserApiTests extends BaseTest {
 		Response response = RestAssured.given().when().headers(header.HeaderWithUpdatedToken()).when()
 				.post(ApiPathMapper.extendedPath().get("POST_USERS_FOLLOW"));
 		test.log(LogStatus.INFO, "Response body is " + response.getBody().asString());
-
+		test.log(LogStatus.INFO, "Nodes verification has been initiated");
 		// Response nodes check
 		ResponseValidation.responseKeyValidation(response, "Nodes_FollowUser");
 
