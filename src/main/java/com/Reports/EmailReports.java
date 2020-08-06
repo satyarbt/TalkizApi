@@ -1,9 +1,7 @@
-package com.EmailConfig;
-
+package com.Reports;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -18,14 +16,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import org.testng.ITestListener;
-
 import org.testng.annotations.Listeners;
-
 import com.DataMapper.EmailMapper;
 import com.DataMapper.TestSummaryMapper;
-import com.Reports.ReportListner;
+
 
 
 @Listeners(ReportListner.class)
@@ -75,7 +70,7 @@ public class EmailReports extends ReportListner implements ITestListener {
 					"<table style=\"width:600px\" width=\"600\">\r\n" + 
 					"<tbody>\r\n" + 
 					"<tr height=\"50\" style=\"padding-top:24px;padding-bottom:24px\">\r\n" + 
-					"                    <td width=\"50%\" style=\"width:50%;padding:0\"><img style=\"width:150px\" src=\" \" alt=\"KATALON LOGO\" class=\"CToWUd\"></td>\r\n" + 
+					"                    <td width=\"50%\" style=\"width:50%;padding:0\"><img style=\"width:150px\" src=\"https://www.z5x.tech/wp-content/themes/z5x/images/z5xlogo.png\" alt=\"KATALON LOGO\" class=\"CToWUd\"></td>\r\n" + 
 					"                    <td width=\"50%\" valign=\"middle\" style=\"width:50%;vertical-align:middle;padding:0\">\r\n" + 
 					"                        <h2 style=\"margin:0;font-size:18px;color:#9733FF;text-align:right\">Test Execution Report</h2>\r\n" + 
 					"                    </td>\r\n" + 
