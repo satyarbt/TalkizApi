@@ -2,26 +2,26 @@
 <testng-results skipped="0" failed="6" ignored="0" total="32" passed="26">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="11712" started-at="2020-08-03T16:11:47 IST" finished-at="2020-08-03T16:11:58 IST">
+  <suite name="Default suite" duration-ms="11624" started-at="2020-08-06T11:51:12 IST" finished-at="2020-08-06T11:51:23 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="11712" started-at="2020-08-03T16:11:47 IST" finished-at="2020-08-03T16:11:58 IST">
+    <test name="Default test" duration-ms="11624" started-at="2020-08-06T11:51:12 IST" finished-at="2020-08-06T11:51:23 IST">
       <class name="com.User.UserApiTests">
-        <test-method status="PASS" signature="def_baseUrl()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="def_baseUrl" is-config="true" duration-ms="460" started-at="2020-08-03T16:11:46 IST" finished-at="2020-08-03T16:11:47 IST">
+        <test-method status="PASS" signature="def_baseUrl()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="def_baseUrl" is-config="true" duration-ms="548" started-at="2020-08-06T11:51:11 IST" finished-at="2020-08-06T11:51:12 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- def_baseUrl -->
-        <test-method status="PASS" signature="POST_CreateAUser_Nodes()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="POST_CreateAUser_Nodes" duration-ms="3028" started-at="2020-08-03T16:11:47 IST" description="Verify createUser API Nodes" finished-at="2020-08-03T16:11:50 IST">
+        <test-method status="PASS" signature="POST_CreateAUser_Nodes()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="POST_CreateAUser_Nodes" duration-ms="3774" started-at="2020-08-06T11:51:12 IST" description="Verify createUser API Nodes" finished-at="2020-08-06T11:51:16 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_CreateAUser_Nodes -->
-        <test-method status="FAIL" signature="POST_CreateAUser_StatusCode_Time()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="POST_CreateAUser_StatusCode_Time" duration-ms="738" started-at="2020-08-03T16:11:50 IST" description="Verify createUser API StatusCode, ResponseTime" finished-at="2020-08-03T16:11:51 IST">
+        <test-method status="FAIL" signature="POST_CreateAUser_StatusCode_Time()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="POST_CreateAUser_StatusCode_Time" duration-ms="814" started-at="2020-08-06T11:51:16 IST" description="Verify createUser API StatusCode, ResponseTime" finished-at="2020-08-06T11:51:17 IST">
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Time allocated 703ms is greater than expected time 500ms expected [true] but found [false]]]>
+              <![CDATA[Time allocated 765ms is greater than expected time 500ms expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Time allocated 703ms is greater than expected time 500ms expected [true] but found [false]
+              <![CDATA[java.lang.AssertionError: Time allocated 765ms is greater than expected time 500ms expected [true] but found [false]
 at com.Reports.ReportListner.onTestFailure(ReportListner.java:65)
 at org.testng.internal.TestListenerHelper.runTestListeners(TestListenerHelper.java:66)
 at org.testng.internal.TestInvoker.runTestResultListener(TestInvoker.java:219)
@@ -54,7 +54,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_CreateAUser_StatusCode_Time -->
-        <test-method status="FAIL" signature="POST_verifyOTP_Nodes()[pri:1, instance:com.User.UserApiTests@56235b8e]" name="POST_verifyOTP_Nodes" duration-ms="316" started-at="2020-08-03T16:11:51 IST" description="Verify userName&amp;OTP API Nodes" finished-at="2020-08-03T16:11:51 IST">
+        <test-method status="FAIL" signature="POST_verifyOTP_Nodes()[pri:1, instance:com.User.UserApiTests@56235b8e]" name="POST_verifyOTP_Nodes" duration-ms="286" started-at="2020-08-06T11:51:17 IST" description="Verify userName&amp;OTP API Nodes" finished-at="2020-08-06T11:51:17 IST">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[The following asserts failed:
@@ -103,67 +103,67 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_verifyOTP_Nodes -->
-        <test-method status="PASS" signature="POST_verifyOTP_StatusCode_Time()[pri:1, instance:com.User.UserApiTests@56235b8e]" name="POST_verifyOTP_StatusCode_Time" duration-ms="255" started-at="2020-08-03T16:11:51 IST" description="Verify userName&amp;OTP API Response Code, ResponseTime" finished-at="2020-08-03T16:11:51 IST">
+        <test-method status="PASS" signature="POST_verifyOTP_StatusCode_Time()[pri:1, instance:com.User.UserApiTests@56235b8e]" name="POST_verifyOTP_StatusCode_Time" duration-ms="285" started-at="2020-08-06T11:51:17 IST" description="Verify userName&amp;OTP API Response Code, ResponseTime" finished-at="2020-08-06T11:51:17 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_verifyOTP_StatusCode_Time -->
-        <test-method status="PASS" signature="GET_GetPreference_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_GetPreference_Nodes" duration-ms="351" started-at="2020-08-03T16:11:51 IST" description="Verify getPreference API Nodes" finished-at="2020-08-03T16:11:52 IST">
+        <test-method status="PASS" signature="GET_GetPreference_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_GetPreference_Nodes" duration-ms="176" started-at="2020-08-06T11:51:17 IST" description="Verify getPreference API Nodes" finished-at="2020-08-06T11:51:17 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_GetPreference_Nodes -->
-        <test-method status="PASS" signature="GET_GetPreference_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_GetPreference_StatusCode_Time" duration-ms="179" started-at="2020-08-03T16:11:52 IST" description="Verify getPreference API StatusCode, Response Time" finished-at="2020-08-03T16:11:52 IST">
+        <test-method status="PASS" signature="GET_GetPreference_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_GetPreference_StatusCode_Time" duration-ms="185" started-at="2020-08-06T11:51:17 IST" description="Verify getPreference API StatusCode, Response Time" finished-at="2020-08-06T11:51:17 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_GetPreference_StatusCode_Time -->
-        <test-method status="PASS" signature="GET_OtherUserProfile_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_OtherUserProfile_Nodes" duration-ms="401" started-at="2020-08-03T16:11:52 IST" description="Verify getOtherUserProfile API Nodes" finished-at="2020-08-03T16:11:52 IST">
+        <test-method status="PASS" signature="GET_OtherUserProfile_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_OtherUserProfile_Nodes" duration-ms="298" started-at="2020-08-06T11:51:17 IST" description="Verify getOtherUserProfile API Nodes" finished-at="2020-08-06T11:51:18 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_OtherUserProfile_Nodes -->
-        <test-method status="PASS" signature="GET_OtherUserProfile_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_OtherUserProfile_StatusCode_Time" duration-ms="395" started-at="2020-08-03T16:11:52 IST" description="Verify getOtherUserProfile API StatusCode, Response Time" finished-at="2020-08-03T16:11:53 IST">
+        <test-method status="PASS" signature="GET_OtherUserProfile_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_OtherUserProfile_StatusCode_Time" duration-ms="348" started-at="2020-08-06T11:51:18 IST" description="Verify getOtherUserProfile API StatusCode, Response Time" finished-at="2020-08-06T11:51:18 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_OtherUserProfile_StatusCode_Time -->
-        <test-method status="PASS" signature="GET_UsersFollowingMe()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_UsersFollowingMe" duration-ms="256" started-at="2020-08-03T16:11:53 IST" description="Verify UsersFollowingMe API Nodes " finished-at="2020-08-03T16:11:53 IST">
+        <test-method status="PASS" signature="GET_UsersFollowingMe()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_UsersFollowingMe" duration-ms="246" started-at="2020-08-06T11:51:18 IST" description="Verify UsersFollowingMe API Nodes " finished-at="2020-08-06T11:51:18 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_UsersFollowingMe -->
-        <test-method status="PASS" signature="GET_UsersFollowingMe_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_UsersFollowingMe_StatusCode_Time" duration-ms="220" started-at="2020-08-03T16:11:53 IST" description="Verify UsersFollowingMe API StatusCode, Response Time" finished-at="2020-08-03T16:11:53 IST">
+        <test-method status="PASS" signature="GET_UsersFollowingMe_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_UsersFollowingMe_StatusCode_Time" duration-ms="222" started-at="2020-08-06T11:51:18 IST" description="Verify UsersFollowingMe API StatusCode, Response Time" finished-at="2020-08-06T11:51:19 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_UsersFollowingMe_StatusCode_Time -->
-        <test-method status="PASS" signature="GET_getProfile_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_getProfile_Nodes" duration-ms="258" started-at="2020-08-03T16:11:53 IST" description="Verify getProfile API Nodes" finished-at="2020-08-03T16:11:53 IST">
+        <test-method status="PASS" signature="GET_getProfile_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_getProfile_Nodes" duration-ms="281" started-at="2020-08-06T11:51:19 IST" description="Verify getProfile API Nodes" finished-at="2020-08-06T11:51:19 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_getProfile_Nodes -->
-        <test-method status="PASS" signature="GET_getProfile_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_getProfile_StatusCode_Time" duration-ms="281" started-at="2020-08-03T16:11:53 IST" description="Verify getProfile API StatusCode, Response Time" finished-at="2020-08-03T16:11:54 IST">
+        <test-method status="PASS" signature="GET_getProfile_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="GET_getProfile_StatusCode_Time" duration-ms="296" started-at="2020-08-06T11:51:19 IST" description="Verify getProfile API StatusCode, Response Time" finished-at="2020-08-06T11:51:19 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_getProfile_StatusCode_Time -->
-        <test-method status="PASS" signature="PUT_UpdateBankDetails_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateBankDetails_Nodes" duration-ms="196" started-at="2020-08-03T16:11:54 IST" description="Verify UpdateBankDetails API Nodes" finished-at="2020-08-03T16:11:54 IST">
+        <test-method status="PASS" signature="PUT_UpdateBankDetails_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateBankDetails_Nodes" duration-ms="193" started-at="2020-08-06T11:51:19 IST" description="Verify UpdateBankDetails API Nodes" finished-at="2020-08-06T11:51:19 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateBankDetails_Nodes -->
-        <test-method status="PASS" signature="PUT_UpdateBankDetails_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateBankDetails_StatusCode_Time" duration-ms="184" started-at="2020-08-03T16:11:54 IST" description="Verify UpdateBankDetails API StatusCode, Response Time" finished-at="2020-08-03T16:11:54 IST">
+        <test-method status="PASS" signature="PUT_UpdateBankDetails_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateBankDetails_StatusCode_Time" duration-ms="160" started-at="2020-08-06T11:51:19 IST" description="Verify UpdateBankDetails API StatusCode, Response Time" finished-at="2020-08-06T11:51:19 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateBankDetails_StatusCode_Time -->
-        <test-method status="PASS" signature="PUT_UpdatePreference_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdatePreference_Nodes" duration-ms="176" started-at="2020-08-03T16:11:54 IST" description="Verify updatePreference API Nodes" finished-at="2020-08-03T16:11:54 IST">
+        <test-method status="PASS" signature="PUT_UpdatePreference_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdatePreference_Nodes" duration-ms="163" started-at="2020-08-06T11:51:19 IST" description="Verify updatePreference API Nodes" finished-at="2020-08-06T11:51:20 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdatePreference_Nodes -->
-        <test-method status="PASS" signature="PUT_UpdatePreferences_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdatePreferences_StatusCode_Time" duration-ms="210" started-at="2020-08-03T16:11:54 IST" description="Verify updatePreference API StatusCode, Response Time" finished-at="2020-08-03T16:11:54 IST">
+        <test-method status="PASS" signature="PUT_UpdatePreferences_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdatePreferences_StatusCode_Time" duration-ms="212" started-at="2020-08-06T11:51:20 IST" description="Verify updatePreference API StatusCode, Response Time" finished-at="2020-08-06T11:51:20 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdatePreferences_StatusCode_Time -->
-        <test-method status="PASS" signature="PUT_UpdateProfileImage_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfileImage_Nodes" duration-ms="618" started-at="2020-08-03T16:11:54 IST" description="Verify updateProfileImage API Nodes" finished-at="2020-08-03T16:11:55 IST">
+        <test-method status="PASS" signature="PUT_UpdateProfileImage_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfileImage_Nodes" duration-ms="342" started-at="2020-08-06T11:51:20 IST" description="Verify updateProfileImage API Nodes" finished-at="2020-08-06T11:51:20 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateProfileImage_Nodes -->
-        <test-method status="PASS" signature="PUT_UpdateProfileImage_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfileImage_StatusCode_Time" duration-ms="485" started-at="2020-08-03T16:11:55 IST" description="Verify updateProfileImage API StatusCode, Response Time" finished-at="2020-08-03T16:11:55 IST">
+        <test-method status="PASS" signature="PUT_UpdateProfileImage_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfileImage_StatusCode_Time" duration-ms="243" started-at="2020-08-06T11:51:20 IST" description="Verify updateProfileImage API StatusCode, Response Time" finished-at="2020-08-06T11:51:20 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateProfileImage_StatusCode_Time -->
-        <test-method status="FAIL" signature="PUT_UpdateProfile_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfile_Nodes" duration-ms="230" started-at="2020-08-03T16:11:55 IST" description="Verify updateProfile API Nodes" finished-at="2020-08-03T16:11:56 IST">
+        <test-method status="FAIL" signature="PUT_UpdateProfile_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfile_Nodes" duration-ms="206" started-at="2020-08-06T11:51:20 IST" description="Verify updateProfile API Nodes" finished-at="2020-08-06T11:51:21 IST">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[The following asserts failed:
@@ -244,11 +244,11 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateProfile_Nodes -->
-        <test-method status="PASS" signature="PUT_UpdateProfile_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfile_StatusCode_Time" duration-ms="373" started-at="2020-08-03T16:11:56 IST" description="Verify updateProfile API StatusCode, Response Time" finished-at="2020-08-03T16:11:56 IST">
+        <test-method status="PASS" signature="PUT_UpdateProfile_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateProfile_StatusCode_Time" duration-ms="220" started-at="2020-08-06T11:51:21 IST" description="Verify updateProfile API StatusCode, Response Time" finished-at="2020-08-06T11:51:21 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateProfile_StatusCode_Time -->
-        <test-method status="FAIL" signature="PUT_UpdateUpiDetails_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateUpiDetails_Nodes" duration-ms="210" started-at="2020-08-03T16:11:56 IST" description="Verify UpdateUpiDetails API Nodes" finished-at="2020-08-03T16:11:56 IST">
+        <test-method status="FAIL" signature="PUT_UpdateUpiDetails_Nodes()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateUpiDetails_Nodes" duration-ms="215" started-at="2020-08-06T11:51:21 IST" description="Verify UpdateUpiDetails API Nodes" finished-at="2020-08-06T11:51:21 IST">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[The following asserts failed:
@@ -291,11 +291,11 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateUpiDetails_Nodes -->
-        <test-method status="PASS" signature="PUT_UpdateUpiDetails_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateUpiDetails_StatusCode_Time" duration-ms="192" started-at="2020-08-03T16:11:56 IST" description="Verify UpdateUpiDetails API StatusCode, Response Time" finished-at="2020-08-03T16:11:56 IST">
+        <test-method status="PASS" signature="PUT_UpdateUpiDetails_StatusCode_Time()[pri:2, instance:com.User.UserApiTests@56235b8e]" name="PUT_UpdateUpiDetails_StatusCode_Time" duration-ms="186" started-at="2020-08-06T11:51:21 IST" description="Verify UpdateUpiDetails API StatusCode, Response Time" finished-at="2020-08-06T11:51:21 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PUT_UpdateUpiDetails_StatusCode_Time -->
-        <test-method status="FAIL" signature="GET_BankDetails_Nodes()[pri:3, instance:com.User.UserApiTests@56235b8e]" name="GET_BankDetails_Nodes" duration-ms="212" started-at="2020-08-03T16:11:56 IST" description="Verify GetBankDetails API Nodes" finished-at="2020-08-03T16:11:57 IST">
+        <test-method status="FAIL" signature="GET_BankDetails_Nodes()[pri:3, instance:com.User.UserApiTests@56235b8e]" name="GET_BankDetails_Nodes" duration-ms="223" started-at="2020-08-06T11:51:21 IST" description="Verify GetBankDetails API Nodes" finished-at="2020-08-06T11:51:22 IST">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[The following asserts failed:
@@ -342,11 +342,11 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_BankDetails_Nodes -->
-        <test-method status="PASS" signature="GET_BankDetails_StatusCode_Time()[pri:3, instance:com.User.UserApiTests@56235b8e]" name="GET_BankDetails_StatusCode_Time" duration-ms="166" started-at="2020-08-03T16:11:57 IST" description="Verify GetBankDetails API StatusCode, Response Time" finished-at="2020-08-03T16:11:57 IST">
+        <test-method status="PASS" signature="GET_BankDetails_StatusCode_Time()[pri:3, instance:com.User.UserApiTests@56235b8e]" name="GET_BankDetails_StatusCode_Time" duration-ms="167" started-at="2020-08-06T11:51:22 IST" description="Verify GetBankDetails API StatusCode, Response Time" finished-at="2020-08-06T11:51:22 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- GET_BankDetails_StatusCode_Time -->
-        <test-method status="FAIL" signature="POST_DeleteBankDetails_Nodes()[pri:4, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteBankDetails_Nodes" duration-ms="172" started-at="2020-08-03T16:11:57 IST" description="Verify DeleteBankDetails API Nodes" finished-at="2020-08-03T16:11:57 IST">
+        <test-method status="FAIL" signature="POST_DeleteBankDetails_Nodes()[pri:4, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteBankDetails_Nodes" duration-ms="207" started-at="2020-08-06T11:51:22 IST" description="Verify DeleteBankDetails API Nodes" finished-at="2020-08-06T11:51:22 IST">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[The following asserts failed:
@@ -389,35 +389,35 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_DeleteBankDetails_Nodes -->
-        <test-method status="PASS" signature="POST_DeleteBankDetails_StatusCode_Time()[pri:4, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteBankDetails_StatusCode_Time" duration-ms="210" started-at="2020-08-03T16:11:57 IST" description="Verify DeleteBankDetails API StatusCode, Response Time" finished-at="2020-08-03T16:11:57 IST">
+        <test-method status="PASS" signature="POST_DeleteBankDetails_StatusCode_Time()[pri:4, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteBankDetails_StatusCode_Time" duration-ms="215" started-at="2020-08-06T11:51:22 IST" description="Verify DeleteBankDetails API StatusCode, Response Time" finished-at="2020-08-06T11:51:22 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_DeleteBankDetails_StatusCode_Time -->
-        <test-method status="PASS" signature="POST_DeleteUpiDetails_Nodes()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteUpiDetails_Nodes" duration-ms="176" started-at="2020-08-03T16:11:57 IST" description="Verify DeleteUpiDetails API Nodes" finished-at="2020-08-03T16:11:57 IST">
+        <test-method status="PASS" signature="POST_DeleteUpiDetails_Nodes()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteUpiDetails_Nodes" duration-ms="173" started-at="2020-08-06T11:51:22 IST" description="Verify DeleteUpiDetails API Nodes" finished-at="2020-08-06T11:51:22 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_DeleteUpiDetails_Nodes -->
-        <test-method status="PASS" signature="POST_DeleteUpiDetails_StatusCode_Time()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteUpiDetails_StatusCode_Time" duration-ms="272" started-at="2020-08-03T16:11:57 IST" description="Verify DeleteUpiDetails API StatusCode, Response Time" finished-at="2020-08-03T16:11:58 IST">
+        <test-method status="PASS" signature="POST_DeleteUpiDetails_StatusCode_Time()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_DeleteUpiDetails_StatusCode_Time" duration-ms="288" started-at="2020-08-06T11:51:22 IST" description="Verify DeleteUpiDetails API StatusCode, Response Time" finished-at="2020-08-06T11:51:23 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_DeleteUpiDetails_StatusCode_Time -->
-        <test-method status="PASS" signature="POST_UnfollowUser_Nodes()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_UnfollowUser_Nodes" duration-ms="174" started-at="2020-08-03T16:11:58 IST" description="Verify UnfollowUser API Nodes" finished-at="2020-08-03T16:11:58 IST">
+        <test-method status="PASS" signature="POST_UnfollowUser_Nodes()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_UnfollowUser_Nodes" duration-ms="177" started-at="2020-08-06T11:51:23 IST" description="Verify UnfollowUser API Nodes" finished-at="2020-08-06T11:51:23 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_UnfollowUser_Nodes -->
-        <test-method status="PASS" signature="POST_UnfollowUser_StatusCode_Time()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_UnfollowUser_StatusCode_Time" duration-ms="186" started-at="2020-08-03T16:11:58 IST" description="Verify UnfollowUser API StatusCode, Response Time" finished-at="2020-08-03T16:11:58 IST">
+        <test-method status="PASS" signature="POST_UnfollowUser_StatusCode_Time()[pri:5, instance:com.User.UserApiTests@56235b8e]" name="POST_UnfollowUser_StatusCode_Time" duration-ms="171" started-at="2020-08-06T11:51:23 IST" description="Verify UnfollowUser API StatusCode, Response Time" finished-at="2020-08-06T11:51:23 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_UnfollowUser_StatusCode_Time -->
-        <test-method status="PASS" signature="POST_FollowUser_Nodes()[pri:6, instance:com.User.UserApiTests@56235b8e]" name="POST_FollowUser_Nodes" duration-ms="189" started-at="2020-08-03T16:11:58 IST" description="Verify FollowUser API Nodes" finished-at="2020-08-03T16:11:58 IST">
+        <test-method status="PASS" signature="POST_FollowUser_Nodes()[pri:6, instance:com.User.UserApiTests@56235b8e]" name="POST_FollowUser_Nodes" duration-ms="183" started-at="2020-08-06T11:51:23 IST" description="Verify FollowUser API Nodes" finished-at="2020-08-06T11:51:23 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_FollowUser_Nodes -->
-        <test-method status="PASS" signature="POST_FollowUser_StatusCode_time()[pri:6, instance:com.User.UserApiTests@56235b8e]" name="POST_FollowUser_StatusCode_time" duration-ms="178" started-at="2020-08-03T16:11:58 IST" description="Verify FollowUser API StatusCode, Response Time" finished-at="2020-08-03T16:11:58 IST">
+        <test-method status="PASS" signature="POST_FollowUser_StatusCode_time()[pri:6, instance:com.User.UserApiTests@56235b8e]" name="POST_FollowUser_StatusCode_time" duration-ms="227" started-at="2020-08-06T11:51:23 IST" description="Verify FollowUser API StatusCode, Response Time" finished-at="2020-08-06T11:51:23 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- POST_FollowUser_StatusCode_time -->
-        <test-method status="PASS" signature="SM()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="SM" is-config="true" duration-ms="5651" started-at="2020-08-03T16:11:59 IST" finished-at="2020-08-03T16:12:04 IST">
+        <test-method status="PASS" signature="SM()[pri:0, instance:com.User.UserApiTests@56235b8e]" name="SM" is-config="true" duration-ms="4899" started-at="2020-08-06T11:51:24 IST" finished-at="2020-08-06T11:51:29 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- SM -->

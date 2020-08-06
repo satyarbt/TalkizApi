@@ -1,9 +1,7 @@
-package com.EmailConfig;
-
+package com.Reports;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -18,14 +16,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import org.testng.ITestListener;
-
 import org.testng.annotations.Listeners;
-
 import com.DataMapper.EmailMapper;
 import com.DataMapper.TestSummaryMapper;
-import com.Reports.ReportListner;
+
 
 
 @Listeners(ReportListner.class)
